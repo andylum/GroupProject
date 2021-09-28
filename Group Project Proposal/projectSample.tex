@@ -154,7 +154,7 @@
 
 \IEEEtitleabstractindextext{%
 \begin{abstract}
-\projname{} will be a minamalist game library manager to help gamers keep track of all of their games across various launchers. This proposal document is the bulk of what we've done so far.
+In the modern era of PC gaming, its too easy to lose track of games. Many of the biggest games are spread across multiple launchers, while a lot of smaller games find themselves disconnected from all of them. That's where Vapor comes in. \projname{} is a minamalist game library manager to help gamers keep track of all of their games across various launchers. This proposal document is the bulk of what we've done so far.
 \end{abstract}
 
 }
@@ -173,13 +173,12 @@
 
 \section{Introduction}
 
-In the modern era of PC gaming, its too easy to lose track of games. Many of the biggest games are spread across multiple launchers, while a lot of smaller games find themselves disconnected from all of them. Even the launchers that allow for users to add games often require them to search for each game individually. This makes it easier than ever to simply forget you have games downloaded, even if you keep them organized.
-
-That's where \projname{} comes in. \projname{} will allow for a user to keep up with every game they have on their computer with minimal upkeep on their end.
-
+Increasing popularity of PC gaming has lead to a unique situation where many of the biggest developers want to create their own storefronts and game libraries to maximize the amount of profit they make on a game sale. This becomes a hassle for gamers who simply want to play their games without having to sift through multiple different programs to find where their game is hiding.
 
 \subsection{Background}
-Increasing popularity of PC gaming has lead to a unique situation where many of the biggest developers want to create their own storefronts and game libraries to maximize the amount of profit they make on a game sale. This becomes a hassle for gamers who simply want to play their games without having to sift through multiple different programs to find where their game is hiding. This issue is further exacerbated by storefronts without their own launchers, or programs managed by storefronts/developers to , leading to a collection of stray games.
+This issue is further exacerbated by storefronts without their own launchers, or programs managed by storefronts/developers to sell their games, leading to a collection of stray programs on your computer that you download to play one or two games.
+
+Vapor exists to solve this problem. Vapor is a video game library manager, a program that allows a user to manage their library of video games.
 
 \subsection{Impacts}
 At the very least, our goal is to make game management easier and more flexible for the user. We want to create an environment where someone can avoid wasting time sifting through folders or launchers just to find what game they want to play, or avoid wasting money buying games they already own because they simply can't find what they're looking for.
@@ -201,6 +200,7 @@ The initial goal for this project is to create a functional interface that allow
 A few possible stretch goals could be:
 
 \begin{itemize}
+\item Offline Mode, a way to use the launcher without needing to connect to any databases (with possibly limited functionality)
 \item Icons that allow for a user to discern where the games are from, such as Steam, Battle.net, or a user defined Library folder.
 \item A store page that allows a user to search/browse popular storefronts like Steam, GOG, and Humble.
 \item Allow the user to create and manage groups of games
@@ -213,7 +213,14 @@ As part of fleshing out the scope of your requirements, you'll also need to keep
 
 \begin{itemize}
 \item User needs to have a locally stored list of games on the computer - including their locations and any necessary assets such as cover art or icons
-\item 
+\item User needs to have cover art and icons for each game
+\item User needs to be able to launch games from the program
+\end{itemize}
+
+\subsubsection{Non-Functional}
+
+\begin{itemize}
+\item Game information has to be saved somewhere convenient to reference whether online or offline 
 \end{itemize}
 
 %
@@ -287,15 +294,37 @@ Alternative: Game exists in list
 %
 \begin{itemize}
 \item[Use Case Number:] 2
-\item[Use Case Name:] Add a folder to list
-\item[Description:] A user wants to add a folder full of games to the list. They open up a settings drop-down and click on an "Add Folder To Vapor" button. This will then allow the user to select the file they want to a dd and subsequently add it to the program.
+\item[Use Case Name:] Add a folder of games to list
+\item[Description:] A user wants to add a folder of games to the list. They open up a settings drop-down and click on an "Add Library Folder To Vapor" button. This will then allow the user to select the file they want to a dd and subsequently add it to the program.
 \end{itemize}
+
+\begin{enumerate}
+\item User opens up the settings menu.
+\item User left-clicks on "Add Library Folder To Vapor"
+\item User searches for and selects the folder they want to add.
+\item The program searches through the folder for any games it can find and adds them to the list.
+\item[Termination Outcome:] The folder is added to the program, and the games inside of it are added to the list.
+\end{enumerate}
+
+Alternative: The folder has already been added
+\begin{enumerate}
+\item User opens up the settings menu.
+\item User left-clicks on "Add Library Folder To Vapor"
+\item User searches for and selects the folder they want to add.
+\item[Termination Outcome:] A message pops up saying the folder already exists in the program and returns to the list screen.
+\end{enumerate}
 
 \begin{itemize}
 \item[Use Case Number:] 3
 \item[Use Case Name:] Launch a game from Vapor
 \item[Description:] A user wants to play a game. They left click on the game they want to play from their list, and then left click a "Play" button.
 \end{itemize}
+
+\begin{enumerate}
+\item User left-clicks on the game they want to launch from their list.
+\item User navigates over to a large "Play" button
+\item[Termination Outcome:] The game is run.
+\end{enumerate}
 
 %
 %You will then need to continue to flesh out all use cases you have identified for your project.
@@ -307,6 +336,7 @@ Alternative: Game exists in list
 %\end{figure}
 %
 \subsection{Interface Mockups}
+\includegraphics[width=6in]{interfaceroughdraft.png}
 %At first, this will largely be completely made up, as you get further along in your project, and closer to a final product, this will typically become simple screenshots of your running application.
 %
 %In this subsection, you will be showing what the screen should look like as the user moves through various use cases (make sure to tie the interface mockups back to the specific use cases they illustrate).
