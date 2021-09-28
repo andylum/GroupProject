@@ -141,10 +141,9 @@
 \begin{document}
 
 % found this here: https://stackoverflow.com/questions/1211888/is-there-any-way-i-can-define-a-variable-in-latex
-% haven't actually decided on a finalized name yet, so using this as a placeholder name.
 \newcommand\projname{Vapor}
 
-\title{\projname, A PC Game Library Manager\\ UTM CSCI 352 Group Project}
+\title{\projname, A PC Game Library Manager}
 %
 %
 
@@ -180,13 +179,13 @@ That's where \projname{} comes in. \projname{} will allow for a user to keep up 
 
 
 \subsection{Background}
-Increasing popularity of PC gaming has lead to a unique situation where many of the biggest developers want to create their own storefronts and game libraries to maximize the amount of profit they make on a game sale. This becomes a hassle for gamers who simply want to play their games without having to sift through multiple different programs to find where their game is hiding. This issue is further exacerbated by storefronts without their own launchers, leading to a collection of stray games.
+Increasing popularity of PC gaming has lead to a unique situation where many of the biggest developers want to create their own storefronts and game libraries to maximize the amount of profit they make on a game sale. This becomes a hassle for gamers who simply want to play their games without having to sift through multiple different programs to find where their game is hiding. This issue is further exacerbated by storefronts without their own launchers, or programs managed by storefronts/developers to , leading to a collection of stray games.
 
 \subsection{Impacts}
-At the very least, our goal is to make game management easier and more flexible for the user, and to learn new things over the course of the project.
+At the very least, our goal is to make game management easier and more flexible for the user. We want to create an environment where someone can avoid wasting time sifting through folders or launchers just to find what game they want to play, or avoid wasting money buying games they already own because they simply can't find what they're looking for.
 
 \subsection{Challenges}
-The major challenges here will come with actually implementing everything well.
+The immediate challenges this project brings up include determining what the name of a particular game is, finding the launcher that the game is associated with, and figuring out how to work with online databases.
 
 \section{Scope}
 The initial goal for this project is to create a functional interface that allows for a user to have all of their games accessible and playable through a single library manager. This would include:
@@ -202,15 +201,21 @@ The initial goal for this project is to create a functional interface that allow
 A few possible stretch goals could be:
 
 \begin{itemize}
-\item Allowing users to downgrade their Steam games
 \item Icons that allow for a user to discern where the games are from, such as Steam, Battle.net, or a user defined Library folder.
 \item A store page that allows a user to search/browse popular storefronts like Steam, GOG, and Humble.
 \item Allow the user to create and manage groups of games
 \end{itemize}
 
+\subsection{Requirements}
+As part of fleshing out the scope of your requirements, you'll also need to keep in mind both your functional and non-functional requirements.  These should be listed, and explained in detail as necessary.  Use this area to explain how you gathered these requirements.
 
-%\subsection{Requirements}
-%As part of fleshing out the scope of your requirements, you'll also need to keep in mind both your functional and non-functional requirements.  These should be listed, and explained in detail as necessary.  Use this area to explain how you gathered these requirements.
+\subsubsection{Functional}
+
+\begin{itemize}
+\item User needs to have a locally stored list of games on the computer - including their locations and any necessary assets such as cover art or icons
+\item 
+\end{itemize}
+
 %
 %\subsubsection{Functional}
 %\begin{itemize}
@@ -225,7 +230,7 @@ A few possible stretch goals could be:
 %\item you'll typically have fewer non-functional than functional requirements
 %\end{itemize}
 %
-%\subsection{Use Cases}
+\subsection{Use Cases}
 %This subsection is arguably part of how you define your project scope (why it is in the Scope section...).  In a traditional Waterfall approach, as part of your requirements gathering phase (what does the product actually \emph{need} to do?), you will typically sit down with a user to develop use cases.
 %
 %You should have a table listing all use cases discussed in the document, the ID is just the order it is listed in, the name should be indicative of what should happen, the primary actor is typically most important in an application where you may have different levels of users (think admin vs normal user), complexity is a best-guess on your part as to how hard it should be.  A lower number in priority indicates that it needs to happen sooner rather than later.  A sample table, or Use Case Index can be seen in Table \ref{tab:useCaseIndex}.
@@ -243,48 +248,48 @@ A few possible stretch goals could be:
 %\hline
 %2 & Checkout & Shopper & Med & 1\\
 %\hline
-%
+
 %\end{tabular}
 %\caption{Sample use case table}
 %\label{tab:useCaseIndex}
 %\end{table}
-%
-%
-%\begin{itemize}
-%\item[Use Case Number:] 1
-%\item[Use Case Name:] Add item to cart
-%\item[Description:] A shopper on our site has identified an item they wish to buy.  They will click on a ``Add to Cart" button.  This will kick off a process to add one instance of the item to their cart.
-%\end{itemize}
+
+
+\begin{itemize}
+\item[Use Case Number:] 1
+\item[Use Case Name:] Add a game to list
+\item[Description:] A user wants to add a single game to their list. They open up a settings drop-down and click on an "Add Game To Vapor" button. This will then allow the user to select the file they want to add and subsequently add it to the program
+\end{itemize}
 %
 %You will then go on to (minimally) discuss a basic flow for the process:
 %
-%\begin{enumerate}
-%\item User navigates to page listing desired item
-%\item User left-clicks on ``Add to Cart" button.
-%\item User cart is updated to reflect the new item, this also updates the current total.
-%\item[Termination Outcome:] The user now has a single instance of the item in their cart.
-%\end{enumerate}
+\begin{enumerate}
+\item User opens up the settings menu.
+\item User left-clicks on "Add Game To Vapor" button.
+\item User searches for and selects their game.
+\item The program finds everything needed and adds it to the user's list
+\item[Termination Outcome:] The game the user selected is added to their list.
+\end{enumerate}
 %
 %You may need to also add in any alternative flows:
 %
-%Alternative: Item already exists in the cart
-%\begin{enumerate}
-%\item User navigates to page listing desired item
-%\item User left-clicks on ``Add to Cart" button.
-%\item User cart is updated to reflect the new item, showing that one more instance of the existing item has been added.  This also updates the current total.
-%\item[Termination Outcome:] The user now has multiple instances of the item in their cart.
-%\end{enumerate}
+Alternative: Game exists in list
+\begin{enumerate}
+\item User opens up the settings menu.
+\item User left-clicks on "Add Game To Vapor" button.
+\item User searches for and selects their game.
+\item [Termination Outcome:] A message pops up telling the user that the game is already available in their list, and the screen returns to the main list page.
+\end{enumerate}
 %
 %You will often also need to include pictures or diagrams.  It is quite common to see use-case diagrams in such write-ups.  To properly reference an image, you will need to use the \texttt{figure} environment and will need to reference it in your text (via the \texttt{ref} command) (see Figure \ref{cat1}).  NOTE: this is not a use case diagram, but a kitten.
 %
 %After fully describing a use case, it is time to move on to the next use case:
 %
-%\begin{itemize}
-%\item[Use Case Number:] 2
-%\item[Use Case Name:] Checkout
-%\item[Description:] A shopper on our site has finished shopping.  They will click on a ``Checkout" button.  This will kick off a process to calculate cart total, any taxes, shipping rates, and collect payment from the shopper.
-%
-%\end{itemize}
+\begin{itemize}
+\item[Use Case Number:] 2
+\item[Use Case Name:] Add a folder to list
+\item[Description:] A user wants to add a folder full of games to the list. They open up a settings drop-down and click on an "Add Folder To Vapor" button. This will then allow the user to select the file they want to a dd and subsequently add it to the program.
+\end{itemize}
 %
 %You will then need to continue to flesh out all use cases you have identified for your project.
 %
@@ -294,7 +299,7 @@ A few possible stretch goals could be:
 %\label{cat1}
 %\end{figure}
 %
-%\subsection{Interface Mockups}
+\subsection{Interface Mockups}
 %At first, this will largely be completely made up, as you get further along in your project, and closer to a final product, this will typically become simple screenshots of your running application.
 %
 %In this subsection, you will be showing what the screen should look like as the user moves through various use cases (make sure to tie the interface mockups back to the specific use cases they illustrate).
