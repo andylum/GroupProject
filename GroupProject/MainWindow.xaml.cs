@@ -33,9 +33,9 @@ namespace GroupProject
 
             //this is p much all i got done so far
             BitmapImage newBtmpImg = new BitmapImage();
-            newBtmpImg.BeginInit();
-            newBtmpImg.UriSource = new Uri();
-            newBtmpImg.EndInit();
+            //newBtmpImg.BeginInit();
+            //newBtmpImg.UriSource = new Uri();
+            //newBtmpImg.EndInit();
             
             gameWindow.Show();
         }
