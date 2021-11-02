@@ -28,13 +28,23 @@ namespace GroupProject
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //This pops up a window.
-            //TODO: Fill it with stuff needed in the game window, as indicated by the drawing. 
             Window gameWindow = new Window();
             gameWindow.Height = 400;
             gameWindow.Width = 800;
 
-            //this is p much all i got done so far
-            //BitmapImage newBtmpImg = new BitmapImage(new Uri("/undertale-font"));
+            //create Grid to place stuff on
+            Grid mainGrid = new Grid();
+
+            //TODO: Fill gameWindow with stuff needed in the game window, as indicated by the drawing. 
+            //Info Site: https://www.c-sharpcorner.com/UploadFile/mahesh/using-xaml-image-in-wpf/
+            Image dynamicImage = new Image();
+            dynamicImage.Width = 100;
+            dynamicImage.Height = 100;
+            BitmapImage newBtmpImg = new BitmapImage(new Uri("https://fontmeme.com/images/undertale-font.jpg"));
+            dynamicImage.Source = newBtmpImg;
+
+            mainGrid.Children.Add(dynamicImage);
+            gameWindow.Content = mainGrid;
             
             gameWindow.Show();
         }
