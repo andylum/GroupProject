@@ -24,5 +24,20 @@ namespace GroupProject
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //This pops up a window.
+            //TODO: Fill it with stuff needed in the game window, as indicated by the drawing. 
+            Window gameWindow = new Window();
+
+            //this is p much all i got done so far
+            BitmapImage newBtmpImg = new BitmapImage();
+            newBtmpImg.BeginInit();
+            newBtmpImg.UriSource = new Uri();
+            newBtmpImg.EndInit();
+            
+            gameWindow.Show();
+        }
     }
 }
