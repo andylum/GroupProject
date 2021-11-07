@@ -38,6 +38,13 @@ namespace GroupProject
             }
         }
 
+        private void RemoveGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            Window removeButtonWindow = new Window();
+            removeButtonWindow.Show();
+
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //NOTE: A lot of this is just demo code that will be replaced w/ better code later.
@@ -147,8 +154,18 @@ namespace GroupProject
             gameButton.Width = 100;
             gameButton.Margin = new Thickness(0, 0, 30, 20);
             //Found here: https://stackoverflow.com/questions/57131019/how-to-add-a-click-handler-to-dynamic-created-button-in-c-sharp-wpf-an-object-i
-            gameButton.Click += new RoutedEventHandler(GameWindowButton_Click); 
-            
+            gameButton.Click += new RoutedEventHandler(GameWindowButton_Click);
+            marginBuffer = gameButton.Margin;
+
+            Button removeButton = new Button();
+            removeButton.Content = "Remove Game";
+            removeButton.HorizontalAlignment = HorizontalAlignment.Right;
+            removeButton.VerticalAlignment = VerticalAlignment.Top;
+            removeButton.Height = 40;
+            removeButton.Width = 100;
+            removeButton.Margin = marginBuffer;
+            removeButton.Click += new RoutedEventHandler(RemoveGameButton_Click);
+
 
             //Add things needed in the gameWindow to the Grid
             mainGrid.Children.Add(gameLogo);
@@ -158,6 +175,7 @@ namespace GroupProject
             mainGrid.Children.Add(gameLastUpdated);
             mainGrid.Children.Add(gameSize);
             mainGrid.Children.Add(gameButton);
+            mainGrid.Children.Add(removeButton);
 
             gameWindow.Content = mainGrid;
 
