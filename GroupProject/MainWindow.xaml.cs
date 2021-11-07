@@ -20,6 +20,7 @@ namespace GroupProject
     /// </summary>
     public partial class MainWindow : Window
     {
+        private string gameLocation = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\th16tr\\th16.exe";
         public MainWindow()
         {
             InitializeComponent();
@@ -167,7 +168,7 @@ namespace GroupProject
             //Found here: https://stackoverflow.com/questions/57131019/how-to-add-a-click-handler-to-dynamic-created-button-in-c-sharp-wpf-an-object-i
             gameButton.Click += (_, args) =>
             {
-                string gameLocation = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\th16tr\\th16.exe";
+                
                 try
                 {
                     System.Diagnostics.Process.Start(gameLocation);
