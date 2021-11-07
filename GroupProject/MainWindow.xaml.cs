@@ -25,29 +25,41 @@ namespace GroupProject
             InitializeComponent();
         }
 
-        private void GameWindowButton_Click(object sender, RoutedEventArgs e)
-        {
-            string gameLocation = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\100 Orange Juice\\100orange_x86.exe";
-            try
-            {
-                System.Diagnostics.Process.Start(gameLocation);
-            }
-            catch
-            {
-                //Catch whatever errors somehow
-            }
-        }
-
         private void RemoveGameButton_Click(object sender, RoutedEventArgs e)
         {
+            //Just exists to show that the removeButton does something. Can't actually remove games bc everything is Hard Coded
             Window removeButtonWindow = new Window();
+            removeButtonWindow.Height = removeButtonWindow.Width = 200;
+            Grid remGrid = new Grid();
+            remGrid.RenderSize = new Size(removeButtonWindow.Width, removeButtonWindow.Height);
+
+            TextBox tesxtBox = new TextBox();
+            tesxtBox.Text = "Removing games is impossible rn. \nToo much hard coding.";
+
+
+            Button okButton = new Button();
+            okButton.Content = "OK";
+            okButton.Height = 20;
+            okButton.Width = 60;
+            okButton.VerticalAlignment = VerticalAlignment.Bottom;
+            //StackOverflow god teaching me about anonymous functions: https://stackoverflow.com/questions/13793490/close-dynamically-created-form-with-dynamic-button
+            okButton.Click += (_, args) =>
+            {
+                removeButtonWindow.Close();
+            };
+
+            remGrid.Children.Add(tesxtBox);
+            remGrid.Children.Add(okButton);
+
+            removeButtonWindow.Content = remGrid;
+
             removeButtonWindow.Show();
 
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //NOTE: A lot of this is just demo code that will be replaced w/ better code later.
+            //NOTE: A lot of this is just demo code that will be replaced w/ less/no hard-coding later.
             //gameWindow will become its own class, as a child of Window
 
             //Creates the basic window object
@@ -59,20 +71,19 @@ namespace GroupProject
             Grid mainGrid = new Grid();
             mainGrid.RenderSize = new Size(gameWindow.Width, gameWindow.Height);
 
-            //TODO: Fill gameWindow with stuff needed in the game window, as indicated by the drawing. 
-            //Info Site: https://www.c-sharpcorner.com/UploadFile/mahesh/using-xaml-image-in-wpf/
+            //Taught me how to dynamically add images to a window
+            //https://www.c-sharpcorner.com/UploadFile/mahesh/using-xaml-image-in-wpf/
 
             //Logo
             //Uses half the size of the header.jpg present on steamdb (460 x 215 by default)
             Image gameLogo = new Image();
             gameLogo.Width = 230;
             gameLogo.Height = 107;
-            BitmapImage newBtmpImg = new BitmapImage(new Uri("https://cdn.cloudflare.steamstatic.com/steam/apps/391540/header.jpg"));
-            gameLogo.Source = newBtmpImg;
+            gameLogo.Source = new BitmapImage(new Uri("https://cdn.cloudflare.steamstatic.com/steam/apps/391540/header.jpg")); //can grab link from steamdb/igdb for this in full ver
             gameLogo.HorizontalAlignment = HorizontalAlignment.Left;
             gameLogo.VerticalAlignment = VerticalAlignment.Top;
             //marginBuffer moves the position of the objects based on the previous object's position
-            Thickness marginBuffer = new Thickness(10, 10, 0, 0); 
+            Thickness marginBuffer = new Thickness(10, 10, 0, 0);
             gameLogo.Margin = marginBuffer;
             marginBuffer.Top += gameLogo.Height;
 
@@ -154,7 +165,18 @@ namespace GroupProject
             gameButton.Width = 100;
             gameButton.Margin = new Thickness(0, 0, 30, 20);
             //Found here: https://stackoverflow.com/questions/57131019/how-to-add-a-click-handler-to-dynamic-created-button-in-c-sharp-wpf-an-object-i
-            gameButton.Click += new RoutedEventHandler(GameWindowButton_Click);
+            gameButton.Click += (_, args) =>
+            {
+                string gameLocation = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\th16tr\\th16.exe";
+                try
+                {
+                    System.Diagnostics.Process.Start(gameLocation);
+                }
+                catch
+                {
+                    //show error somewhere
+                };
+            };
             marginBuffer = gameButton.Margin;
 
             Button removeButton = new Button();
