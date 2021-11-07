@@ -25,19 +25,6 @@ namespace GroupProject
             InitializeComponent();
         }
 
-        private void GameWindowButton_Click(object sender, RoutedEventArgs e)
-        {
-            string gameLocation = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\100 Orange Juice\\100orange_x86.exe";
-            try
-            {
-                System.Diagnostics.Process.Start(gameLocation);
-            }
-            catch
-            {
-                //Catch whatever errors somehow
-            }
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //NOTE: A lot of this is just demo code that will be replaced w/ better code later.
