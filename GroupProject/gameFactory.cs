@@ -6,6 +6,17 @@ namespace GroupProject
 {
     class gameFactory
     {
-        //TODO: Add stuff here
+        public game createGame()
+        {
+            //TODO: Add stuff here
+        }
+
+        public steamGame createSteamGame()
+        {
+            //TODO: Add stuff here
+        }
+
     }
+
+    
 }

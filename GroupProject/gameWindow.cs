@@ -9,7 +9,7 @@ namespace GroupProject
     class gameWindow : Window
     {
         Grid mainGrid;
-        public gameWindow()
+        public gameWindow(game loadGame)
         {
             this.Height = 400;
             this.Width = 800;
@@ -17,13 +17,15 @@ namespace GroupProject
             mainGrid = new Grid();
             mainGrid.RenderSize = new Size(this.Height, this.Width);
 
-            loadImage();
+            fillGrid();
+
+            this.Content = mainGrid;
             //TODO: Complete stuff here
         }
 
-        private void loadImage()
+        private void fillGrid()
         {
-
+            //TODO: This stuff here
         }
     }
 }
