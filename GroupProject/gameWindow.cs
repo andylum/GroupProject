@@ -65,28 +65,11 @@ namespace GroupProject
                 //get data from igdb
             }
             gameDesc.Text = dbData;
-            //TODO: Actually make the text wrap instead of just running off the side of the screen
-            //Below text doesn't work. Just a general idea that came to mind.
-            /*int stringPos = 0;
-            int sinceLastNewline = 0;
-            while (stringPos < gameDesc.Text.Length)
-            {
-                stringPos++;
-                sinceLastNewline++;
-                if(sinceLastNewline > 50)
-                {
-                    if(gameDesc.Text[stringPos] == ' ')
-                    {
-                        gameDesc.Text.Insert(stringPos, "\n");
-                        sinceLastNewline = 0;
-                    }
-                }
-            }
-            */
             gameDesc.HorizontalAlignment = HorizontalAlignment.Left;
             gameDesc.VerticalAlignment = VerticalAlignment.Top;
             gameDesc.Margin = marginBuffer;
             gameDesc.Width = this.Width;
+            gameDesc.TextWrapping = TextWrapping.Wrap;
             gameDesc.FontSize = 16;
             gameDesc.FontFamily = new FontFamily("Comic Sans MS");
             marginBuffer.Top += 100;
