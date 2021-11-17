@@ -27,6 +27,43 @@ namespace GroupProject
             this.Show();
         }
 
+        public virtual void On_LostFocus()
+        {
+            this.Close();
+        }
+
+        private void RemoveGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            //Just exists to show that the removeButton does something. Can't actually remove games bc everything is Hard Coded
+            Window removeButtonWindow = new Window();
+            removeButtonWindow.Height = removeButtonWindow.Width = 200;
+            Grid remGrid = new Grid();
+            remGrid.RenderSize = new Size(removeButtonWindow.Width, removeButtonWindow.Height);
+
+            TextBox tesxtBox = new TextBox();
+            tesxtBox.Text = "Removing games is impossible rn. \nToo much hard coding.";
+
+
+            Button okButton = new Button();
+            okButton.Content = "OK";
+            okButton.Height = 20;
+            okButton.Width = 60;
+            okButton.VerticalAlignment = VerticalAlignment.Bottom;
+            //StackOverflow god teaching me about anonymous functions: https://stackoverflow.com/questions/13793490/close-dynamically-created-form-with-dynamic-button
+            okButton.Click += (_, args) =>
+            {
+                removeButtonWindow.Close();
+            };
+
+            remGrid.Children.Add(tesxtBox);
+            remGrid.Children.Add(okButton);
+
+            removeButtonWindow.Content = remGrid;
+
+            removeButtonWindow.Show();
+
+        }
+
         private void fillGrid()
         {
             //Logo
@@ -77,7 +114,7 @@ namespace GroupProject
 
             //Last Played Time
             TextBlock gameLastPlayed = new TextBlock();
-            gameLastPlayed.Text = "Last Played: " + (new DateTime(2016, 12, 25)).ToShortDateString();
+            gameLastPlayed.Text = "Last Played: " + loadedGame.getLastPlayed();
             gameLastPlayed.HorizontalAlignment = HorizontalAlignment.Left;
             gameLastPlayed.VerticalAlignment = VerticalAlignment.Top;
             gameLastPlayed.Margin = marginBuffer;
@@ -87,7 +124,7 @@ namespace GroupProject
 
             //Last Updated Time
             TextBlock gameLastUpdated = new TextBlock();
-            gameLastUpdated.Text = "Last Updated: " + (new DateTime(2016, 12, 24)).ToShortDateString();
+            gameLastUpdated.Text = "Last Updated: " + loadedGame.getLastUpdated();
             gameLastUpdated.HorizontalAlignment = HorizontalAlignment.Left;
             gameLastUpdated.VerticalAlignment = VerticalAlignment.Top;
             gameLastUpdated.Margin = marginBuffer;
@@ -97,7 +134,7 @@ namespace GroupProject
 
             //Game Size
             TextBlock gameSize = new TextBlock();
-            gameSize.Text = "Game Size: " + 1 + " GB";
+            gameSize.Text = "Game Size: " + loadedGame.getFileSize();
             gameSize.HorizontalAlignment = HorizontalAlignment.Left;
             gameSize.VerticalAlignment = VerticalAlignment.Top;
             gameSize.Margin = marginBuffer;
@@ -113,7 +150,32 @@ namespace GroupProject
             gameButton.Width = 100;
             gameButton.Margin = new Thickness(0, 0, 30, 20);
             //Found here: https://stackoverflow.com/questions/57131019/how-to-add-a-click-handler-to-dynamic-created-button-in-c-sharp-wpf-an-object-i
-            gameButton.Click += new RoutedEventHandler(GameWindowButton_Click);
+            gameButton.Click += (_, args) =>
+            {
+
+                try
+                {
+                    System.Diagnostics.Process.Start(loadedGame.getFilePath());
+                }
+                catch
+                {
+                    Window errorWin = new Window();
+                    TextBox error = new TextBox();
+                    error.Text = "Failed to Start Game";
+                    errorWin.Content = error;
+                    
+                };
+            };
+
+            Button removeButton = new Button();
+            removeButton.Content = "Remove Game";
+            removeButton.HorizontalAlignment = HorizontalAlignment.Right;
+            removeButton.VerticalAlignment = VerticalAlignment.Top;
+            removeButton.Height = 40;
+            removeButton.Width = 100;
+            removeButton.Margin = marginBuffer;
+            removeButton.Click += new RoutedEventHandler(RemoveGameButton_Click);
+
 
 
             //Add things needed in the gameWindow to the Grid
