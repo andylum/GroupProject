@@ -10,13 +10,22 @@ namespace GroupProject
     {
         private string title;
         private string filePath;
-        private Image coverArt;
+        private Uri coverArt;
         private DateTime lastPlayed;
         private double fileSize;
 
         public game()
         {
             //TODO: The constructor
+        }
+
+        public string getTitle()
+        {
+            return title;
+        }
+        public Uri getCoverArt()
+        {
+            return coverArt;
         }
 
         public void execute()

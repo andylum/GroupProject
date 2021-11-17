@@ -25,6 +25,8 @@ namespace GroupProject
             InitializeComponent();
         }
 
+        
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //NOTE: A lot of this is just demo code that will be replaced w/ better code later.
@@ -52,7 +54,7 @@ namespace GroupProject
             gameLogo.HorizontalAlignment = HorizontalAlignment.Left;
             gameLogo.VerticalAlignment = VerticalAlignment.Top;
             //marginBuffer moves the position of the objects based on the previous object's position
-            Thickness marginBuffer = new Thickness(10, 10, 0, 0); 
+            Thickness marginBuffer = new Thickness(10, 10, 0, 0);
             gameLogo.Margin = marginBuffer;
             marginBuffer.Top += gameLogo.Height;
 
@@ -94,7 +96,7 @@ namespace GroupProject
             gameDesc.FontSize = 16;
             gameDesc.FontFamily = new FontFamily("Comic Sans MS");
             marginBuffer.Top += 100;
-            
+
 
             //Last Played Time
             TextBlock gameLastPlayed = new TextBlock();
@@ -134,8 +136,8 @@ namespace GroupProject
             gameButton.Width = 100;
             gameButton.Margin = new Thickness(0, 0, 30, 20);
             //Found here: https://stackoverflow.com/questions/57131019/how-to-add-a-click-handler-to-dynamic-created-button-in-c-sharp-wpf-an-object-i
-            gameButton.Click += new RoutedEventHandler(GameWindowButton_Click); 
-            
+            gameButton.Click += new RoutedEventHandler(GameWindowButton_Click);
+
 
             //Add things needed in the gameWindow to the Grid
             mainGrid.Children.Add(gameLogo);
