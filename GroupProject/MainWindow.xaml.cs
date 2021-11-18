@@ -20,6 +20,8 @@ namespace GroupProject
     /// </summary>
     public partial class MainWindow : Window
     {
+        string loadFile = "./list.txt";
+        gameList gList;
         Grid browseGamesWin;
         Grid extrasPanel;
         public MainWindow()
@@ -28,7 +30,16 @@ namespace GroupProject
             extrasPanel.Width = 100;
             browseGamesWin.Height = this.Height;
             browseGamesWin.Width = this.Width - extrasPanel.Width;
+
+            gList = new gameList(loadFile);
+
             InitializeComponent();
+        }
+
+        public void RecommendedGame()
+        {
+            Random recommender = new Random();
+            //grab a random game from the loaded library
         }
 
     }

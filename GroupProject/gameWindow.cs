@@ -92,8 +92,8 @@ namespace GroupProject
 
             //Game Descritpion
             TextBlock gameDesc = new TextBlock();
-            string dbData;
-            if (loadedGame.GetType().GetMethod("getSteamAppID") != null)
+            string dbData = "";
+            if (loadedGame.GetType().GetMethod("getappID") != null)
             {
                 //get data from steamdb
             }

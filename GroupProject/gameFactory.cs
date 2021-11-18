@@ -6,14 +6,26 @@ namespace GroupProject
 {
     class gameFactory
     {
-        public game createGame()
+        private Uri getCoverArt(string title)
         {
-            //TODO: Add stuff here
+            //get the cover art from the internet
         }
 
-        public steamGame createSteamGame()
+        public game createGame(string title, string filePath, DateTime lastPlayed, double fileSize, DateTime lastUpdated)
         {
-            //TODO: Add stuff here
+            try
+            {
+                return createSteamGame(title, filePath, lastPlayed, fileSize, lastUpdated, -1);
+            }
+            catch
+            {
+                return new game(title, filePath, getCoverArt(title), lastPlayed, fileSize, lastUpdated);
+            }
+        }
+
+        public steamGame createSteamGame(string title, string filePath, DateTime lastPlayed, double fileSize, DateTime lastUpdated, int appID = -1)
+        {
+            throw new Exception("This is just for testing purposes bc I want to compile this sometime soon.");
         }
 
     }

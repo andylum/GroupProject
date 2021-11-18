@@ -8,9 +8,10 @@ namespace GroupProject
     {
         //TODO: Also do this class as well
         List<game> gList;
-        public gameList()
+        public gameList(string loadFile)
         {
-            gList = new List<game>;
+            gList = new List<game>();
+            loadList();
         }
 
         private void loadList()

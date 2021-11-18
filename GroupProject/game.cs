@@ -15,9 +15,14 @@ namespace GroupProject
         private double fileSize;
         private DateTime lastUpdated;
 
-        public game()
+        public game(string title, string filePath, Uri coverArt, DateTime lastPlayed, double fileSize, DateTime lastUpdated)
         {
-            //TODO: The constructor
+            this.title = title;
+            this.filePath = filePath;
+            this.coverArt = coverArt;
+            this.lastPlayed = lastPlayed;
+            this.fileSize = fileSize;
+            this.lastUpdated = lastUpdated;
         }
 
         public DateTime getLastPlayed()

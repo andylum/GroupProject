@@ -12,5 +12,10 @@ namespace GroupProject
         {
             //TODO: The constructor
         }
+
+        public UInt32 getappID()
+        {
+            return appID;
+        }
     }
 }
