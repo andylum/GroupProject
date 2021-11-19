@@ -20,10 +20,11 @@ namespace GroupProject
     /// </summary>
     public partial class MainWindow : Window
     {
-        string loadFile = "./list.txt";
+        string loadFile = "./list.txt"; //this is just hard coded but might actually work
         gameList gList;
         Grid browseGamesWin;
         Grid extrasPanel;
+
         public MainWindow()
         {
             extrasPanel.Height = this.Height;
@@ -36,15 +37,10 @@ namespace GroupProject
             InitializeComponent();
         }
 
-        public void openGameWindow(object sender, RoutedEventArgs e)
-        {
-
-        }
-        public void RecommendedGame()
+        public void RecommendedGame() //Call this on recommended button click
         {
             Random recommender = new Random();
-            recommender.Next(gList.getList().Count);
-
+            new gameWindow(gList.getList().ElementAt(recommender.Next(gList.getList().Count)));
         }
 
         public void loadButtons()
@@ -55,7 +51,15 @@ namespace GroupProject
                 Button gameButton = new Button();
                 BitmapImage gameImage = new BitmapImage(videogame.getCoverArt());
                 gameButton.Content = gameImage;
+                gameButton.Click += (_, args) =>
+                {
+                    new gameWindow(videogame);
+                };
+
+                //TODO: Add game button to browseGamesWin
             }
+
+            //TODO: Create extras panel
         }
     }
 }

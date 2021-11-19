@@ -22,6 +22,7 @@ namespace GroupProject
         private void loadList()
         {
             gameFactory fact = new gameFactory();
+            //TODO:
             //read data for a game into memory
             //call fact to create game in list
             //loop until file empty, fill list with gamse

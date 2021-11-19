@@ -34,34 +34,7 @@ namespace GroupProject
 
         private void RemoveGameButton_Click(object sender, RoutedEventArgs e)
         {
-            //Just exists to show that the removeButton does something. Can't actually remove games bc everything is Hard Coded
-            Window removeButtonWindow = new Window();
-            removeButtonWindow.Height = removeButtonWindow.Width = 200;
-            Grid remGrid = new Grid();
-            remGrid.RenderSize = new Size(removeButtonWindow.Width, removeButtonWindow.Height);
-
-            TextBox tesxtBox = new TextBox();
-            tesxtBox.Text = "Removing games is impossible rn. \nToo much hard coding.";
-
-
-            Button okButton = new Button();
-            okButton.Content = "OK";
-            okButton.Height = 20;
-            okButton.Width = 60;
-            okButton.VerticalAlignment = VerticalAlignment.Bottom;
-            //StackOverflow god teaching me about anonymous functions: https://stackoverflow.com/questions/13793490/close-dynamically-created-form-with-dynamic-button
-            okButton.Click += (_, args) =>
-            {
-                removeButtonWindow.Close();
-            };
-
-            remGrid.Children.Add(tesxtBox);
-            remGrid.Children.Add(okButton);
-
-            removeButtonWindow.Content = remGrid;
-
-            removeButtonWindow.Show();
-
+            //TODO: Remove the game
         }
 
         private void fillGrid()
@@ -150,12 +123,13 @@ namespace GroupProject
             gameButton.Width = 100;
             gameButton.Margin = new Thickness(0, 0, 30, 20);
             //Found here: https://stackoverflow.com/questions/57131019/how-to-add-a-click-handler-to-dynamic-created-button-in-c-sharp-wpf-an-object-i
+            //StackOverflow god teaching me about anonymous functions: https://stackoverflow.com/questions/13793490/close-dynamically-created-form-with-dynamic-button
             gameButton.Click += (_, args) =>
             {
 
                 try
                 {
-                    System.Diagnostics.Process.Start(loadedGame.getFilePath());
+                    loadedGame.execute();
                 }
                 catch
                 {

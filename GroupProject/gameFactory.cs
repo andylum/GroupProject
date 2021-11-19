@@ -8,7 +8,7 @@ namespace GroupProject
     {
         private Uri getCoverArt(string title)
         {
-            //get the cover art from the internet
+            //TODO: get the cover art from the internet
         }
 
         public game createGame(string title, string filePath, DateTime lastPlayed, double fileSize, DateTime lastUpdated)
