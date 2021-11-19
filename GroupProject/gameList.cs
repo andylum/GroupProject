@@ -7,13 +7,18 @@ namespace GroupProject
     class gameList
     {
         //TODO: Also do this class as well
-        List<game> gList;
+        private List<game> gList;
         public gameList(string loadFile)
         {
             gList = new List<game>();
             loadList();
         }
 
+        public List<game> getList()
+        {
+            List<game> readonlyList = gList;
+            return readonlyList;
+        }
         private void loadList()
         {
             gameFactory fact = new gameFactory();

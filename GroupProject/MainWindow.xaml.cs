@@ -36,11 +36,26 @@ namespace GroupProject
             InitializeComponent();
         }
 
+        public void openGameWindow(object sender, RoutedEventArgs e)
+        {
+
+        }
         public void RecommendedGame()
         {
             Random recommender = new Random();
-            //grab a random game from the loaded library
+            recommender.Next(gList.getList().Count);
+
         }
 
+        public void loadButtons()
+        {
+            foreach (game videogame in gList.getList())
+            {
+                
+                Button gameButton = new Button();
+                BitmapImage gameImage = new BitmapImage(videogame.getCoverArt());
+                gameButton.Content = gameImage;
+            }
+        }
     }
 }
