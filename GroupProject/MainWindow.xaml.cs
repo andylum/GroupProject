@@ -24,6 +24,8 @@ namespace GroupProject
         gameList gList;
         Grid browseGamesWin;
         Grid extrasPanel;
+        int buttHeight = 88;
+        int buttWidth = 88;
 
         public MainWindow()
         {
@@ -44,12 +46,15 @@ namespace GroupProject
             extrasPanel.HorizontalAlignment = HorizontalAlignment.Right;
             extrasPanel.VerticalAlignment = VerticalAlignment.Top;
 
+            gList = new gameList(loadFile);
+
+            loadButtons();
+
             winContent.Children.Add(extrasPanel);
             winContent.Children.Add(browseGamesWin);
 
             this.Content = winContent;
 
-            gList = new gameList(loadFile);
 
             InitializeComponent();
         }
@@ -62,6 +67,9 @@ namespace GroupProject
 
         public void loadButtons()
         {
+            Thickness beginButtons = new Thickness(56, 61, 0, 0);
+            int buttHorizontal = buttWidth + 20;
+            int buttVertical = buttHeight + 20;
             foreach (game videogame in gList.getList())
             {
                 
