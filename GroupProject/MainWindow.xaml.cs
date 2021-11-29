@@ -27,10 +27,27 @@ namespace GroupProject
 
         public MainWindow()
         {
+            Grid winContent = new Grid();
+            browseGamesWin = new Grid();
+            extrasPanel = new Grid();
+
             extrasPanel.Height = this.Height;
             extrasPanel.Width = 100;
             browseGamesWin.Height = this.Height;
             browseGamesWin.Width = this.Width - extrasPanel.Width;
+
+
+
+            browseGamesWin.HorizontalAlignment = HorizontalAlignment.Left;
+            browseGamesWin.VerticalAlignment = VerticalAlignment.Top;
+
+            extrasPanel.HorizontalAlignment = HorizontalAlignment.Right;
+            extrasPanel.VerticalAlignment = VerticalAlignment.Top;
+
+            winContent.Children.Add(extrasPanel);
+            winContent.Children.Add(browseGamesWin);
+
+            this.Content = winContent;
 
             gList = new gameList(loadFile);
 
