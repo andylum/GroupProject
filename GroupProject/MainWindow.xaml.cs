@@ -59,6 +59,7 @@ namespace GroupProject
             InitializeComponent();
         }
 
+
         public void RecommendedGame() //Call this on recommended button click
         {
             Random recommender = new Random();
@@ -85,6 +86,11 @@ namespace GroupProject
             }
 
             //TODO: Create extras panel
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
