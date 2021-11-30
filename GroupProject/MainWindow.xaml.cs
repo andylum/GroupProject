@@ -31,26 +31,17 @@ namespace GroupProject
         {
             Grid winContent = new Grid();
             browseGamesWin = new Grid();
-            extrasPanel = new Grid();
 
-            extrasPanel.Height = this.Height;
-            extrasPanel.Width = 100;
             browseGamesWin.Height = this.Height;
-            browseGamesWin.Width = this.Width - extrasPanel.Width;
-
-
+            browseGamesWin.Width = this.Width - 100;
 
             browseGamesWin.HorizontalAlignment = HorizontalAlignment.Left;
             browseGamesWin.VerticalAlignment = VerticalAlignment.Top;
-
-            extrasPanel.HorizontalAlignment = HorizontalAlignment.Right;
-            extrasPanel.VerticalAlignment = VerticalAlignment.Top;
 
             gList = new gameList(loadFile);
 
             loadButtons();
 
-            winContent.Children.Add(extrasPanel);
             winContent.Children.Add(browseGamesWin);
 
             this.Content = winContent;
@@ -71,6 +62,9 @@ namespace GroupProject
             Thickness beginButtons = new Thickness(56, 61, 0, 0);
             int buttHorizontal = buttWidth + 20;
             int buttVertical = buttHeight + 20;
+            const int horizSlot = 5;
+            int vertPos = 0;
+            int horizPos = 0;
             foreach (game videogame in gList.getList())
             {
                 
@@ -82,10 +76,18 @@ namespace GroupProject
                     new gameWindow(videogame);
                 };
 
-                //TODO: Add game button to browseGamesWin
+                gameButton.Margin = beginButtons;
+
+                horizPos++;
+                if(horizPos % horizSlot == 0)
+                {
+                    horizPos = 0;
+                    vertPos++;
+                }
+
+                beginButtons = new Thickness(56 + (buttHorizontal * horizPos), 61 + (buttVertical * vertPos), 0, 0);
             }
 
-            //TODO: Create extras panel
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
