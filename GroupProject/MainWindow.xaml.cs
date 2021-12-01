@@ -28,8 +28,6 @@ namespace GroupProject
         {
             gList = new gameList(loadFile);
 
-           
-
             InitializeComponent();
 
             loadButtons();
