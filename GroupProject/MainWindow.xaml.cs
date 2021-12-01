@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace GroupProject
 {
@@ -20,189 +21,174 @@ namespace GroupProject
     /// </summary>
     public partial class MainWindow : Window
     {
-        private string gameLocation = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\th16tr\\th16.exe";
+        string loadFile = "./list.txt"; //this is just hard coded but might actually work
+        gameList gList;
+
         public MainWindow()
         {
+            gList = new gameList(loadFile);
+
             InitializeComponent();
+
+            loadButtons();
         }
 
-        private void RemoveGameButton_Click(object sender, RoutedEventArgs e)
+        public void RandomGame(object sender, RoutedEventArgs e) //Call this on recommended button click
         {
-            //Just exists to show that the removeButton does something. Can't actually remove games bc everything is Hard Coded
-            Window removeButtonWindow = new Window();
-            removeButtonWindow.Height = removeButtonWindow.Width = 200;
-            Grid remGrid = new Grid();
-            remGrid.RenderSize = new Size(removeButtonWindow.Width, removeButtonWindow.Height);
-
-            TextBox tesxtBox = new TextBox();
-            tesxtBox.Text = "Removing games is impossible rn. \nToo much hard coding.";
-
-
-            Button okButton = new Button();
-            okButton.Content = "OK";
-            okButton.Height = 20;
-            okButton.Width = 60;
-            okButton.VerticalAlignment = VerticalAlignment.Bottom;
-            //StackOverflow god teaching me about anonymous functions: https://stackoverflow.com/questions/13793490/close-dynamically-created-form-with-dynamic-button
-            okButton.Click += (_, args) =>
+            if(gList.getList().Count <= 0 || gList.getList() == null)
             {
-                removeButtonWindow.Close();
-            };
-
-            remGrid.Children.Add(tesxtBox);
-            remGrid.Children.Add(okButton);
-
-            removeButtonWindow.Content = remGrid;
-
-            removeButtonWindow.Show();
-
+                Window errorWin = new Window();
+                TextBox error = new TextBox();
+                errorWin.Height = 200;
+                errorWin.Width = 200;
+                error.Text = "No games are loaded in!";
+                errorWin.Content = error;
+                errorWin.Show();
+                return;
+            }
+            Random recommender = new Random();
+            new gameWindow(gList.getList().ElementAt(recommender.Next(gList.getList().Count)));
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public void RecentlyPlayedGame(object sender, RoutedEventArgs e)
         {
-            //NOTE: A lot of this is just demo code that will be replaced w/ less/no hard-coding later.
-            //gameWindow will become its own class, as a child of Window
-
-            //Creates the basic window object
-            Window gameWindow = new Window();
-            gameWindow.Height = this.Height;
-            gameWindow.Width = this.Width;
-
-            //create Grid to add information onto
-            Grid mainGrid = new Grid();
-            mainGrid.RenderSize = new Size(gameWindow.Width, gameWindow.Height);
-
-            //Taught me how to dynamically add images to a window
-            //https://www.c-sharpcorner.com/UploadFile/mahesh/using-xaml-image-in-wpf/
-
-            //Logo
-            //Uses half the size of the header.jpg present on steamdb (460 x 215 by default)
-            Image gameLogo = new Image();
-            gameLogo.Width = 230;
-            gameLogo.Height = 107;
-            gameLogo.Source = new BitmapImage(new Uri("https://cdn.cloudflare.steamstatic.com/steam/apps/391540/header.jpg")); //can grab link from steamdb/igdb for this in full ver
-            gameLogo.HorizontalAlignment = HorizontalAlignment.Left;
-            gameLogo.VerticalAlignment = VerticalAlignment.Top;
-            //marginBuffer moves the position of the objects based on the previous object's position
-            Thickness marginBuffer = new Thickness(10, 10, 0, 0);
-            gameLogo.Margin = marginBuffer;
-            marginBuffer.Top += gameLogo.Height;
-
-            //Game Name
-            TextBlock gameName = new TextBlock();
-            gameName.Text = "Name: Undertale";
-            gameName.HorizontalAlignment = HorizontalAlignment.Left;
-            gameName.VerticalAlignment = VerticalAlignment.Top;
-            gameName.Margin = marginBuffer;
-            gameName.FontSize = 16;
-            gameName.FontFamily = new FontFamily("Comic Sans MS");
-            marginBuffer.Top += 30;
-
-            //Game Descritpion
-            TextBlock gameDesc = new TextBlock();
-            gameDesc.Text = "This is the description for popular Independent Video Game Undertale. Does this automatically wrap or will I need to do something to acknowledge when the line goes outside of the border and then split it, or maybe manually have a text box size and let it wrap that way? Idk, we'll see.";
-            //TODO: Actually make the text wrap instead of just running off the side of the screen
-            //Below text doesn't work. Just a general idea that came to mind.
-            /*int stringPos = 0;
-            int sinceLastNewline = 0;
-            while (stringPos < gameDesc.Text.Length)
+            if (gList.getList().Count <= 0 || gList.getList() == null)
             {
-                stringPos++;
-                sinceLastNewline++;
-                if(sinceLastNewline > 50)
+                Window errorWin = new Window();
+                TextBox error = new TextBox();
+                errorWin.Height = 200;
+                errorWin.Width = 200;
+                error.Text = "No games are loaded in!";
+                errorWin.Content = error;
+                errorWin.Show();
+                return;
+            }
+            game recePlayedGame = gList.getList()[0];
+            foreach(game videogame in gList.getList())
+            {
+                if(recePlayedGame.getLastPlayed() < videogame.getLastPlayed())
                 {
-                    if(gameDesc.Text[stringPos] == ' ')
-                    {
-                        gameDesc.Text.Insert(stringPos, "\n");
-                        sinceLastNewline = 0;
-                    }
+                    recePlayedGame = videogame;
+                }
+                new gameWindow(recePlayedGame);
+            }
+        }
+        public void UnplayedGame(object sender, RoutedEventArgs e)
+        {
+            List<game> unplayedGames = new List<game>();
+            foreach(game videogame in gList.getList())
+            {
+                if(videogame.getLastPlayed() == new DateTime(0))
+                {
+                    unplayedGames.Add(videogame);
                 }
             }
-            */
-            gameDesc.HorizontalAlignment = HorizontalAlignment.Left;
-            gameDesc.VerticalAlignment = VerticalAlignment.Top;
-            gameDesc.Margin = marginBuffer;
-            gameDesc.Width = this.Width;
-            gameDesc.FontSize = 16;
-            gameDesc.FontFamily = new FontFamily("Comic Sans MS");
-            marginBuffer.Top += 100;
+
+            if (unplayedGames.Count <= 0 || unplayedGames == null)
+            {
+                Window errorWin = new Window();
+                TextBox error = new TextBox();
+                errorWin.Height = 200;
+                errorWin.Width = 200;
+                error.Text = "No games are loaded in!";
+                errorWin.Content = error;
+                errorWin.Show();
+                return;
+            }
+
+            Random recommender = new Random();
+            new gameWindow(unplayedGames.ElementAt(recommender.Next(unplayedGames.Count)));
+        }
+
+        public void loadButtons()
+        {
+            Thickness beginButtons = new Thickness(0, 0, 0, 0);
+            int buttHeight = 80;
+            int buttWidth = 80;
+            int buttHorizontal = buttWidth + 20;
+            int buttVertical = buttHeight + 20;
+            const int horizSlot = 5; //max number of slots to for buttons to sit horizontally
+            int vertPos = 0;
+            int horizPos = 0;
+            foreach (game videogame in gList.getList())
+            {
+                //create a button
+                Button gameButton = new Button();
+                gameButton.Content = videogame.getTitle();
+                gameButton.Height = buttHeight;
+                gameButton.Width = buttWidth;
+                gameButton.HorizontalAlignment = HorizontalAlignment.Left;
+                gameButton.VerticalAlignment = VerticalAlignment.Top;
+                gameButton.Click += (_, args) =>
+                {
+                    new gameWindow(videogame);
+                };
+
+                //place the button in this place on the grid
+                gameButton.Margin = beginButtons;
+                browseGameWin.Children.Add(gameButton);
+
+                //set the next place for a button to go
+                horizPos++;
+                if(horizPos % horizSlot == 0)
+                {
+                    horizPos = 0;
+                    vertPos++;
+                }
+
+                beginButtons = new Thickness((buttHorizontal * horizPos), (buttVertical * vertPos), 0, 0);
+            }
+
+        }
+
+
+        public void update()
+        {
+            gList.loadList(loadFile);
+            browseGameWin.Children.Clear(); //clears all the buttons on screen before readding them
+            loadButtons();
+        }
+
+        private void removeGame_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO
+            //open a window with a drop down box containing all games
+            //user clicks the box and says ok to remove the game
+            //the game is removed from library by overwriting the database and updating the main window
+        }
+
+        private void addGame_Click(object sender, RoutedEventArgs e)
+        {
+            //grab file from folder
+            game videogame;
+            gameFactory fact = new gameFactory();
+            OpenFileDialog selectGame = new OpenFileDialog();
+            selectGame.InitialDirectory = "c:\\";
+            selectGame.Filter = "Executable files (*.exe)|*.exe|All files (*.*)|*.*";
+            selectGame.FilterIndex = 0;
+            selectGame.RestoreDirectory = true;
+
+            if ((bool)selectGame.ShowDialog())
+            {
+                videogame = fact.createGame(selectGame.FileName);
+            }
+            else
+            {
+                return;
+            }
             
 
-            //Last Played Time
-            TextBlock gameLastPlayed = new TextBlock();
-            gameLastPlayed.Text = "Last Played: " + (new DateTime(2016, 12, 25)).ToShortDateString();
-            gameLastPlayed.HorizontalAlignment = HorizontalAlignment.Left;
-            gameLastPlayed.VerticalAlignment = VerticalAlignment.Top;
-            gameLastPlayed.Margin = marginBuffer;
-            gameLastPlayed.FontSize = 16;
-            gameLastPlayed.FontFamily = new FontFamily("Comic Sans MS");
-            marginBuffer.Left += 200;
+            //append to file
+            System.IO.StreamWriter file = new System.IO.StreamWriter(loadFile, append: true);
+            file.WriteLine(videogame.getTitle());
+            file.WriteLine(videogame.getFilePath());
+            file.WriteLine(videogame.getCoverArt().OriginalString);
+            file.WriteLine(videogame.getLastPlayed().Ticks.ToString());
+            file.WriteLine(videogame.getFileSize().ToString());
+            file.Close();
 
-            //Last Updated Time
-            TextBlock gameLastUpdated = new TextBlock();
-            gameLastUpdated.Text = "Last Updated: " + (new DateTime(2016, 12, 24)).ToShortDateString();
-            gameLastUpdated.HorizontalAlignment = HorizontalAlignment.Left;
-            gameLastUpdated.VerticalAlignment = VerticalAlignment.Top;
-            gameLastUpdated.Margin = marginBuffer;
-            gameLastUpdated.FontSize = 16;
-            gameLastUpdated.FontFamily = new FontFamily("Comic Sans MS");
-            marginBuffer.Left += 220;
-
-            //Game Size
-            TextBlock gameSize = new TextBlock();
-            gameSize.Text = "Game Size: " + 1 + " GB";
-            gameSize.HorizontalAlignment = HorizontalAlignment.Left;
-            gameSize.VerticalAlignment = VerticalAlignment.Top;
-            gameSize.Margin = marginBuffer;
-            gameSize.FontSize = 16;
-            gameSize.FontFamily = new FontFamily("Comic Sans MS");
-
-            //Open Game Button
-            Button gameButton = new Button();
-            gameButton.Content = "Play Game";
-            gameButton.HorizontalAlignment = HorizontalAlignment.Right;
-            gameButton.VerticalAlignment = VerticalAlignment.Bottom;
-            gameButton.Height = 40;
-            gameButton.Width = 100;
-            gameButton.Margin = new Thickness(0, 0, 30, 20);
-            //Found here: https://stackoverflow.com/questions/57131019/how-to-add-a-click-handler-to-dynamic-created-button-in-c-sharp-wpf-an-object-i
-            gameButton.Click += (_, args) =>
-            {
-                
-                try
-                {
-                    System.Diagnostics.Process.Start(gameLocation);
-                }
-                catch
-                {
-                    //show error somewhere
-                };
-            };
-            marginBuffer = gameButton.Margin;
-
-            Button removeButton = new Button();
-            removeButton.Content = "Remove Game";
-            removeButton.HorizontalAlignment = HorizontalAlignment.Right;
-            removeButton.VerticalAlignment = VerticalAlignment.Top;
-            removeButton.Height = 40;
-            removeButton.Width = 100;
-            removeButton.Margin = marginBuffer;
-            removeButton.Click += new RoutedEventHandler(RemoveGameButton_Click);
-
-
-            //Add things needed in the gameWindow to the Grid
-            mainGrid.Children.Add(gameLogo);
-            mainGrid.Children.Add(gameName);
-            mainGrid.Children.Add(gameDesc);
-            mainGrid.Children.Add(gameLastPlayed);
-            mainGrid.Children.Add(gameLastUpdated);
-            mainGrid.Children.Add(gameSize);
-            mainGrid.Children.Add(gameButton);
-            mainGrid.Children.Add(removeButton);
-
-            gameWindow.Content = mainGrid;
-
-            gameWindow.Show();
+            //reload games
+            update();
         }
     }
 }
