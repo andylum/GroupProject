@@ -56,6 +56,7 @@ namespace GroupProject
 
         public void execute()
         {
+            lastPlayed = DateTime.Now;
             System.Diagnostics.Process.Start(filePath);
         }
     }

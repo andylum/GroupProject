@@ -23,16 +23,16 @@ namespace GroupProject
     {
         string loadFile = "./list.txt"; //this is just hard coded but might actually work
         gameList gList;
-        int buttHeight = 88;
-        int buttWidth = 88;
 
         public MainWindow()
         {
             gList = new gameList(loadFile);
 
-            loadButtons();
+           
 
             InitializeComponent();
+
+            loadButtons();
         }
 
         public void RandomGame(object sender, RoutedEventArgs e) //Call this on recommended button click
@@ -77,7 +77,16 @@ namespace GroupProject
         }
         public void UnplayedGame(object sender, RoutedEventArgs e)
         {
-            if (gList.getList().Count <= 0 || gList.getList() == null)
+            List<game> unplayedGames = new List<game>();
+            foreach(game videogame in gList.getList())
+            {
+                if(videogame.getLastPlayed() == new DateTime(0))
+                {
+                    unplayedGames.Add(videogame);
+                }
+            }
+
+            if (unplayedGames.Count <= 0 || unplayedGames == null)
             {
                 Window errorWin = new Window();
                 TextBox error = new TextBox();
@@ -88,14 +97,6 @@ namespace GroupProject
                 errorWin.Show();
                 return;
             }
-            List<game> unplayedGames = new List<game>();
-            foreach(game videogame in gList.getList())
-            {
-                if(videogame.getLastPlayed() == new DateTime(0))
-                {
-                    unplayedGames.Add(videogame);
-                }
-            }
 
             Random recommender = new Random();
             new gameWindow(unplayedGames.ElementAt(recommender.Next(unplayedGames.Count)));
@@ -103,7 +104,9 @@ namespace GroupProject
 
         public void loadButtons()
         {
-            Thickness beginButtons = new Thickness(56, 61, 0, 0);
+            Thickness beginButtons = new Thickness(0, 0, 0, 0);
+            int buttHeight = 80;
+            int buttWidth = 80;
             int buttHorizontal = buttWidth + 20;
             int buttVertical = buttHeight + 20;
             const int horizSlot = 5; //max number of slots to for buttons to sit horizontally
@@ -113,10 +116,11 @@ namespace GroupProject
             {
                 //create a button
                 Button gameButton = new Button();
-                //TODO: Test this later I just need to know if this stuff works
-                //BitmapImage gameImage = new BitmapImage(videogame.getCoverArt());
-                //gameButton.Content = gameImage;
                 gameButton.Content = videogame.getTitle();
+                gameButton.Height = buttHeight;
+                gameButton.Width = buttWidth;
+                gameButton.HorizontalAlignment = HorizontalAlignment.Left;
+                gameButton.VerticalAlignment = VerticalAlignment.Top;
                 gameButton.Click += (_, args) =>
                 {
                     new gameWindow(videogame);
@@ -134,14 +138,17 @@ namespace GroupProject
                     vertPos++;
                 }
 
-                beginButtons = new Thickness(56 + (buttHorizontal * horizPos), 61 + (buttVertical * vertPos), 0, 0);
+                beginButtons = new Thickness((buttHorizontal * horizPos), (buttVertical * vertPos), 0, 0);
             }
 
         }
 
+
         public void update()
         {
             gList.loadList(loadFile);
+            browseGameWin.Children.Clear(); //clears all the buttons on screen before readding them
+            loadButtons();
         }
 
         private void removeGame_Click(object sender, RoutedEventArgs e)
@@ -180,6 +187,7 @@ namespace GroupProject
             file.WriteLine(videogame.getCoverArt().OriginalString);
             file.WriteLine(videogame.getLastPlayed().Ticks.ToString());
             file.WriteLine(videogame.getFileSize().ToString());
+            file.Close();
 
             //reload games
             update();

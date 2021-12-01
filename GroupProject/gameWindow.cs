@@ -5,13 +5,15 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using System.ComponentModel;
 
 namespace GroupProject
 {
     class gameWindow : Window
     {
-        Grid mainGrid;
-        game loadedGame;
+        private Grid mainGrid;
+        private game loadedGame;
+        private bool isClosing = false;
         public gameWindow(game loadGame)
         {
             this.Height = 400;
@@ -27,9 +29,19 @@ namespace GroupProject
             this.Show();
         }
 
-        public virtual void On_LostFocus()
+        protected override void OnClosing(CancelEventArgs e)
         {
-            this.Close();
+            isClosing = true;
+            base.OnClosing(e);
+        }
+
+        protected override void OnDeactivated(EventArgs e)
+        {
+            if (!isClosing)
+            {
+                this.Close();
+            }
+            base.OnDeactivated(e);
         }
 
         private void fillGrid()
@@ -78,7 +90,14 @@ namespace GroupProject
 
             //Last Played Time
             TextBlock gameLastPlayed = new TextBlock();
-            gameLastPlayed.Text = "Last Played: " + loadedGame.getLastPlayed();
+            if (loadedGame.getLastPlayed() == new DateTime(0))
+            {
+                gameLastPlayed.Text = "Unplayed.";
+            }
+            else
+            {
+                gameLastPlayed.Text = "Last Played: " + loadedGame.getLastPlayed().ToShortDateString();
+            }
             gameLastPlayed.HorizontalAlignment = HorizontalAlignment.Left;
             gameLastPlayed.VerticalAlignment = VerticalAlignment.Top;
             gameLastPlayed.Margin = marginBuffer;
@@ -88,7 +107,7 @@ namespace GroupProject
 
             //Last Updated Time
             TextBlock gameLastUpdated = new TextBlock();
-            gameLastUpdated.Text = "Last Updated: " + loadedGame.getLastUpdated();
+            gameLastUpdated.Text = "Last Updated: " + loadedGame.getLastUpdated().ToShortDateString();
             gameLastUpdated.HorizontalAlignment = HorizontalAlignment.Left;
             gameLastUpdated.VerticalAlignment = VerticalAlignment.Top;
             gameLastUpdated.Margin = marginBuffer;
@@ -97,8 +116,33 @@ namespace GroupProject
             marginBuffer.Left += 220;
 
             //Game Size
+            double fileSize = loadedGame.getFileSize();
+            int TeraGigaMegaKiloByte = 0;
+            string prefix = "";
+            while(fileSize >= 1000)
+            {
+                TeraGigaMegaKiloByte++;
+                fileSize /= 1000;
+            }
+            switch (TeraGigaMegaKiloByte)
+            {
+                case 1:
+                    prefix = "K";
+                    break;
+                case 2:
+                    prefix = "M";
+                    break;
+                case 3:
+                    prefix = "G";
+                    break;
+                case 4:
+                    prefix = "T";
+                    break;
+                default:
+                    break;
+            }
             TextBlock gameSize = new TextBlock();
-            gameSize.Text = "Game Size: " + loadedGame.getFileSize();
+            gameSize.Text = "Game Size: " + (int)fileSize + " " + prefix + "B";
             gameSize.HorizontalAlignment = HorizontalAlignment.Left;
             gameSize.VerticalAlignment = VerticalAlignment.Top;
             gameSize.Margin = marginBuffer;
@@ -117,7 +161,6 @@ namespace GroupProject
             //StackOverflow god teaching me about anonymous functions: https://stackoverflow.com/questions/13793490/close-dynamically-created-form-with-dynamic-button
             gameButton.Click += (_, args) =>
             {
-
                 try
                 {
                     loadedGame.execute();

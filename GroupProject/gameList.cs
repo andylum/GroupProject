@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace GroupProject
 {
@@ -32,17 +34,34 @@ namespace GroupProject
 
             string[] gameArr = new string[6];
 
-            string[] text = System.IO.File.ReadAllLines(loadFile);
-            for(int i = 0; i < text.Length; i++)
+            string[] text;
+
+            try
+            {
+                text = System.IO.File.ReadAllLines(loadFile);
+            }catch (Exception e){
+                Window errorWin = new Window();
+                TextBox error = new TextBox();
+                errorWin.Height = 200;
+                errorWin.Width = 200;
+                error.Text = e.Message;
+                error.TextWrapping = TextWrapping.Wrap;
+                errorWin.Content = error;
+                errorWin.Show();
+                return;
+            }
+
+            for (int i = 0; i < text.Length; i++)
             {
                 if(i % 5 == 0 && i != 0)
                 {
                     //title, filepath, cover art, last played (in ticks), filesize, last updated
-                    gList.Add(fact.loadGame(gameArr[1], gameArr[2], new Uri(gameArr[3]), new DateTime(long.Parse(gameArr[4])), double.Parse(gameArr[5]), System.IO.File.GetLastWriteTime(gameArr[2])));
+                    gList.Add(fact.loadGame(gameArr[0], gameArr[1], new Uri(gameArr[2]), new DateTime(long.Parse(gameArr[3])), double.Parse(gameArr[4]), System.IO.File.GetLastWriteTime(gameArr[1])));
                 }
                 gameArr[i % 5] = text[i];
             }
 
+            gList.Add(fact.loadGame(gameArr[0], gameArr[1], new Uri(gameArr[2]), new DateTime(long.Parse(gameArr[3])), double.Parse(gameArr[4]), System.IO.File.GetLastWriteTime(gameArr[1])));
         }
 
         public void saveList()

@@ -15,7 +15,7 @@ namespace GroupProject
         private string getTitle(string filePath)
         {
             //just gets the folder name from executable file path
-            string[] splitPath = filePath.Split('/');
+            string[] splitPath = filePath.Split('\\');
             return new string(splitPath[splitPath.Length - 2]);
         }
 
