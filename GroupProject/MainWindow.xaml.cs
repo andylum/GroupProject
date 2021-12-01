@@ -144,7 +144,10 @@ namespace GroupProject
 
         private void removeGame_Click(object sender, RoutedEventArgs e)
         {
-
+            //TODO
+            //open a window with a drop down box containing all games
+            //user clicks the box and says ok to remove the game
+            //the game is removed from library by overwriting the database and updating the main window
         }
 
         private void addGame_Click(object sender, RoutedEventArgs e)
