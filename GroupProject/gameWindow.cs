@@ -32,11 +32,6 @@ namespace GroupProject
             this.Close();
         }
 
-        private void RemoveGameButton_Click(object sender, RoutedEventArgs e)
-        {
-            //TODO: Remove the game
-        }
-
         private void fillGrid()
         {
             //Logo
@@ -66,11 +61,6 @@ namespace GroupProject
             //Game Descritpion
             TextBlock gameDesc = new TextBlock();
             string dbData = "";
-            if (loadedGame.GetType().GetMethod("getappID") != null)
-            {
-                //get data from steamdb
-            }
-            else
             {
                 //get data from igdb
             }
@@ -137,20 +127,8 @@ namespace GroupProject
                     TextBox error = new TextBox();
                     error.Text = "Failed to Start Game";
                     errorWin.Content = error;
-                    
                 };
             };
-
-            Button removeButton = new Button();
-            removeButton.Content = "Remove Game";
-            removeButton.HorizontalAlignment = HorizontalAlignment.Right;
-            removeButton.VerticalAlignment = VerticalAlignment.Top;
-            removeButton.Height = 40;
-            removeButton.Width = 100;
-            removeButton.Margin = marginBuffer;
-            removeButton.Click += new RoutedEventHandler(RemoveGameButton_Click);
-
-
 
             //Add things needed in the gameWindow to the Grid
             mainGrid.Children.Add(gameLogo);

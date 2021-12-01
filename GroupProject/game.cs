@@ -58,10 +58,5 @@ namespace GroupProject
         {
             System.Diagnostics.Process.Start(filePath);
         }
-
-        public void dbUpdate()
-        {
-            //TODO: Update the information stored according to the database
-        }
     }
 }

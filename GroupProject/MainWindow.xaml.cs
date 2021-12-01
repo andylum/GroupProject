@@ -22,37 +22,31 @@ namespace GroupProject
     {
         string loadFile = "./list.txt"; //this is just hard coded but might actually work
         gameList gList;
-        Grid browseGamesWin;
-        Grid extrasPanel;
         int buttHeight = 88;
         int buttWidth = 88;
 
         public MainWindow()
         {
-            Grid winContent = new Grid();
-            browseGamesWin = new Grid();
-
-            browseGamesWin.Height = this.Height;
-            browseGamesWin.Width = this.Width - 100;
-
-            browseGamesWin.HorizontalAlignment = HorizontalAlignment.Left;
-            browseGamesWin.VerticalAlignment = VerticalAlignment.Top;
-
             gList = new gameList(loadFile);
 
             loadButtons();
 
-            winContent.Children.Add(browseGamesWin);
-
-            this.Content = winContent;
-
-
             InitializeComponent();
         }
 
-
-        public void RecommendedGame() //Call this on recommended button click
+        public void RandomGame(object sender, RoutedEventArgs e) //Call this on recommended button click
         {
+            if(gList.getList().Count <= 0 || gList.getList() == null)
+            {
+                Window errorWin = new Window();
+                TextBox error = new TextBox();
+                errorWin.Height = 200;
+                errorWin.Width = 200;
+                error.Text = "No games are loaded in!";
+                errorWin.Content = error;
+                errorWin.Show();
+                return;
+            }
             Random recommender = new Random();
             new gameWindow(gList.getList().ElementAt(recommender.Next(gList.getList().Count)));
         }
@@ -62,12 +56,12 @@ namespace GroupProject
             Thickness beginButtons = new Thickness(56, 61, 0, 0);
             int buttHorizontal = buttWidth + 20;
             int buttVertical = buttHeight + 20;
-            const int horizSlot = 5;
+            const int horizSlot = 5; //max number of slots to for buttons to sit horizontally
             int vertPos = 0;
             int horizPos = 0;
             foreach (game videogame in gList.getList())
             {
-                
+                //create a button
                 Button gameButton = new Button();
                 BitmapImage gameImage = new BitmapImage(videogame.getCoverArt());
                 gameButton.Content = gameImage;
@@ -76,8 +70,11 @@ namespace GroupProject
                     new gameWindow(videogame);
                 };
 
+                //place the button in this place on the grid
                 gameButton.Margin = beginButtons;
+                browseGameWin.Children.Add(gameButton);
 
+                //set the next place for a button to go
                 horizPos++;
                 if(horizPos % horizSlot == 0)
                 {
@@ -90,7 +87,17 @@ namespace GroupProject
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public void update()
+        {
+            gList.loadList(loadFile);
+        }
+
+        private void removeGame_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void addGame_Click(object sender, RoutedEventArgs e)
         {
 
         }

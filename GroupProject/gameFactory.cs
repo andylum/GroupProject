@@ -12,23 +12,22 @@ namespace GroupProject
             return new Uri("https://static.wikia.nocookie.net/senkizesshousymphogear/images/4/45/Symphogear_GX_Character_Song_8.png/revision/latest/scale-to-width-down/300?cb=20200728003041");
         }
 
-        public game createGame(string title, string filePath, DateTime lastPlayed, double fileSize, DateTime lastUpdated)
+        private string getTitle(string filePath)
         {
-            try
-            {
-                return createSteamGame(title, filePath, lastPlayed, fileSize, lastUpdated, -1);
-            }
-            catch
-            {
-                return new game(title, filePath, getCoverArt(title), lastPlayed, fileSize, lastUpdated);
-            }
+            //just gets the folder name from executable file path
+            string[] splitPath = filePath.Split('/');
+            return new string(splitPath[splitPath.Length - 2]);
         }
 
-        public steamGame createSteamGame(string title, string filePath, DateTime lastPlayed, double fileSize, DateTime lastUpdated, int appID = -1)
+        public game createGame(string filePath)
         {
-            throw new Exception("This is just for testing purposes bc I want to compile this sometime soon.");
+            return new game(getTitle(filePath), filePath, getCoverArt(getTitle(filePath)), DateTime.Now, new System.IO.FileInfo(filePath).Length, System.IO.File.GetLastWriteTime(filePath));
         }
 
+        public game loadGame(string title, string filePath, Uri coverArt, DateTime lastPlayed, double fileSize, DateTime lastUpdated)
+        {
+            return new game(title, filePath, coverArt, lastPlayed, fileSize, lastUpdated);
+        }
     }
 
     
