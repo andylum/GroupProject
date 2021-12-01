@@ -59,7 +59,7 @@ namespace GroupProject
             marginBuffer.Top += 30;
 
             //Game Descritpion
-            //TODO: maybe get rid of this idk
+            //TODO: maybe get rid of this idk. If they own the game already do they need a description of it?
             TextBlock gameDesc = new TextBlock();
             string dbData = "";
             {
