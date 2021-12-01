@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,8 +71,8 @@ namespace GroupProject
                 {
                     recePlayedGame = videogame;
                 }
-                new gameWindow(recePlayedGame);
             }
+            new gameWindow(recePlayedGame);
         }
         public void UnplayedGame(object sender, RoutedEventArgs e)
         {
@@ -114,7 +115,11 @@ namespace GroupProject
             {
                 //create a button
                 Button gameButton = new Button();
-                gameButton.Content = videogame.getTitle();
+                TextBlock buttContent = new TextBlock();
+                buttContent.Text = videogame.getTitle();
+                buttContent.TextWrapping = TextWrapping.Wrap;
+                buttContent.TextAlignment = TextAlignment.Center;
+                gameButton.Content = buttContent;
                 gameButton.Height = buttHeight;
                 gameButton.Width = buttWidth;
                 gameButton.HorizontalAlignment = HorizontalAlignment.Left;
@@ -144,17 +149,52 @@ namespace GroupProject
 
         public void update()
         {
-            gList.loadList(loadFile);
             browseGameWin.Children.Clear(); //clears all the buttons on screen before readding them
+            gList.clearList();
+            gList.loadList(loadFile);
             loadButtons();
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            gList.saveList();
+            base.OnClosing(e);
         }
 
         private void removeGame_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
-            //open a window with a drop down box containing all games
-            //user clicks the box and says ok to remove the game
-            //the game is removed from library by overwriting the database and updating the main window
+            Window remGameWin = new Window();
+            Grid remGameGrid = new Grid();
+            remGameGrid.Height = remGameGrid.Width = remGameWin.Height = remGameWin.Width = 250;
+
+            ComboBox remGameList = new ComboBox();
+            remGameList.Height = 30;
+            remGameList.Width = 100;
+            foreach(game videogame in gList.getList())
+            {
+                remGameList.Items.Add(videogame.getTitle());
+            }
+
+            Button confirmButton = new Button();
+            confirmButton.Content = "Remove";
+            confirmButton.Click += (_, args) =>
+            {
+                if(remGameList.SelectedItem == null)
+                {
+                    return;
+                }
+                gList.removeGame(gList.getList()[remGameList.SelectedIndex]);
+                update();
+                remGameWin.Close();
+            };
+            confirmButton.VerticalAlignment = VerticalAlignment.Bottom;
+
+
+            remGameGrid.Children.Add(remGameList);
+            remGameGrid.Children.Add(confirmButton);
+
+            remGameWin.Content = remGameGrid;
+            remGameWin.Show();
         }
 
         private void addGame_Click(object sender, RoutedEventArgs e)

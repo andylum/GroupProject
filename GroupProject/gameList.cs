@@ -78,5 +78,23 @@ namespace GroupProject
 
             System.IO.File.WriteAllLines(dbFile, data);
         }
+
+        public void clearList()
+        {
+            gList.Clear();
+        }
+
+        public void removeGame(game removeGame)
+        {
+            for(int i = 0; i < gList.Count; i++)
+            {
+                if(gList[i].getFilePath() == removeGame.getFilePath())
+                {
+                    gList.RemoveAt(i);
+                    break;
+                }
+            }
+            saveList();
+        }
     }
 }

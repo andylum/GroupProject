@@ -12,12 +12,12 @@
 
             </Grid>
         </ScrollViewer>
-        <TextBlock HorizontalAlignment="Left" Margin="628,20,0,0" Text="Recently Played Game:" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" FontSize="14"/>
-        <Button Content="Recently Played" HorizontalAlignment="Left" Margin="657,39,0,0" VerticalAlignment="Top" Height="88" Width="88"/>
-        <TextBlock HorizontalAlignment="Left" Margin="639,132,0,0" Text="Recommended Game:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14"/>
-        <Button Content="Recommended" HorizontalAlignment="Left" Margin="657,156,0,0" VerticalAlignment="Top" Height="88" Width="88" Click="RandomGame"/>
-        <TextBlock HorizontalAlignment="Left" Margin="650,249,0,0" Text="Unplayed Game:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14"/>
-        <Button Content="Unplayed" HorizontalAlignment="Left" Margin="657,273,0,0" VerticalAlignment="Top" Height="88" Width="88" Click="UnplayedGame"/>
+        <TextBlock HorizontalAlignment="Left" Margin="586,20,0,0" Text="Recently Played Game:" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" FontSize="14"/>
+        <Button Content="Recently Played" HorizontalAlignment="Left" Margin="619,44,0,0" VerticalAlignment="Top" Height="88" Width="88" Click="RecentlyPlayedGame"/>
+        <TextBlock HorizontalAlignment="Left" Margin="595,137,0,0" Text="Recommended Game:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14"/>
+        <Button Content="Recommended" HorizontalAlignment="Left" Margin="619,156,0,0" VerticalAlignment="Top" Height="88" Width="88" Click="RandomGame"/>
+        <TextBlock HorizontalAlignment="Left" Margin="615,249,0,0" Text="Unplayed Game:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14"/>
+        <Button Content="Unplayed" HorizontalAlignment="Left" Margin="622,273,0,0" VerticalAlignment="Top" Height="88" Width="88" Click="UnplayedGame"/>
         <Grid Margin="10,0,580,368" Background="White">
             <Button Content="Add Game" HorizontalAlignment="Left" Margin="25,10,0,0" VerticalAlignment="Top" Click="addGame_Click"/>
             <Button Content="Remove Game" HorizontalAlignment="Left" Margin="98,10,0,0" VerticalAlignment="Top" Click="removeGame_Click"/>
