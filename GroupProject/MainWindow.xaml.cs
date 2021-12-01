@@ -165,7 +165,13 @@ namespace GroupProject
         {
             Window remGameWin = new Window();
             Grid remGameGrid = new Grid();
+            remGameGrid.VerticalAlignment = VerticalAlignment.Top;
             remGameGrid.Height = remGameGrid.Width = remGameWin.Height = remGameWin.Width = 250;
+
+            TextBlock label = new TextBlock();
+            label.Text = "Select a game to remove.";
+            label.VerticalAlignment = VerticalAlignment.Top;
+            label.Margin = new Thickness(60, 50, 0, 0);
 
             ComboBox remGameList = new ComboBox();
             remGameList.Height = 30;
@@ -174,6 +180,7 @@ namespace GroupProject
             {
                 remGameList.Items.Add(videogame.getTitle());
             }
+            remGameList.Margin = new Thickness(0, -70, 0, 0);
 
             Button confirmButton = new Button();
             confirmButton.Content = "Remove";
@@ -187,9 +194,9 @@ namespace GroupProject
                 update();
                 remGameWin.Close();
             };
-            confirmButton.VerticalAlignment = VerticalAlignment.Bottom;
+            confirmButton.VerticalAlignment = VerticalAlignment.Center;
 
-
+            remGameGrid.Children.Add(label);
             remGameGrid.Children.Add(remGameList);
             remGameGrid.Children.Add(confirmButton);
 
