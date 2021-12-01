@@ -113,8 +113,10 @@ namespace GroupProject
             {
                 //create a button
                 Button gameButton = new Button();
-                BitmapImage gameImage = new BitmapImage(videogame.getCoverArt());
-                gameButton.Content = gameImage;
+                //TODO: Test this later I just need to know if this stuff works
+                //BitmapImage gameImage = new BitmapImage(videogame.getCoverArt());
+                //gameButton.Content = gameImage;
+                gameButton.Content = videogame.getTitle();
                 gameButton.Click += (_, args) =>
                 {
                     new gameWindow(videogame);
