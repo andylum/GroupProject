@@ -21,7 +21,7 @@ namespace GroupProject
 
         public game createGame(string filePath)
         {
-            return new game(getTitle(filePath), filePath, getCoverArt(getTitle(filePath)), DateTime.Now, new System.IO.FileInfo(filePath).Length, System.IO.File.GetLastWriteTime(filePath));
+            return new game(getTitle(filePath), filePath, getCoverArt(getTitle(filePath)), new DateTime(0), new System.IO.FileInfo(filePath).Length, System.IO.File.GetLastWriteTime(filePath));
         }
 
         public game loadGame(string title, string filePath, Uri coverArt, DateTime lastPlayed, double fileSize, DateTime lastUpdated)

@@ -34,9 +34,9 @@ namespace GroupProject
 
         private void fillGrid()
         {
+            //TODO: Restructure for IGDB cover art.
+
             //Logo
-            //Uses half the size of the header.jpg present on steamdb
-            //TODO: Make this change based on the DB site used.
             Image gameLogo = new Image();
             gameLogo.Width = 230;
             gameLogo.Height = 107;
@@ -59,10 +59,11 @@ namespace GroupProject
             marginBuffer.Top += 30;
 
             //Game Descritpion
+            //TODO: maybe get rid of this idk
             TextBlock gameDesc = new TextBlock();
             string dbData = "";
             {
-                //get data from igdb
+                //TODO: get data from igdb
             }
             gameDesc.Text = dbData;
             gameDesc.HorizontalAlignment = HorizontalAlignment.Left;

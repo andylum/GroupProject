@@ -8,9 +8,6 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid Name="browseGameWin" Margin="25,50,170,24">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
 
         </Grid>
         <TextBlock HorizontalAlignment="Left" Margin="639,35,0,0" Text="Recently Played Game:" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" FontSize="14"/>
@@ -18,8 +15,8 @@
         <TextBlock HorizontalAlignment="Left" Margin="639,167,0,0" Text="Recommended Game:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14"/>
         <Button Content="Recommended" HorizontalAlignment="Left" Margin="657,191,0,0" VerticalAlignment="Top" Height="88" Width="88" Click="RandomGame"/>
         <TextBlock HorizontalAlignment="Left" Margin="650,290,0,0" Text="Unplayed Game:" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14"/>
-        <Button Content="Unplayed" HorizontalAlignment="Left" Margin="657,314,0,0" VerticalAlignment="Top" Height="88" Width="88"/>
+        <Button Content="Unplayed" HorizontalAlignment="Left" Margin="657,314,0,0" VerticalAlignment="Top" Height="88" Width="88" Click="UnplayedGame"/>
         <Button Content="Add Game" HorizontalAlignment="Left" Margin="25,10,0,0" VerticalAlignment="Top" Click="addGame_Click"/>
-        <Button Content="Remove Game" HorizontalAlignment="Left" Margin="104,10,0,0" VerticalAlignment="Top" Click="removeGame_Click"/>
+        <Button Content="Remove Game" HorizontalAlignment="Left" Margin="98,10,0,0" VerticalAlignment="Top" Click="removeGame_Click"/>
     </Grid>
 </Window>

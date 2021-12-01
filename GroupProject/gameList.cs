@@ -40,7 +40,7 @@ namespace GroupProject
                     //title, filepath, cover art, last played (in ticks), filesize, last updated
                     gList.Add(fact.loadGame(gameArr[1], gameArr[2], new Uri(gameArr[3]), new DateTime(long.Parse(gameArr[4])), double.Parse(gameArr[5]), System.IO.File.GetLastWriteTime(gameArr[2])));
                 }
-                gameArr[i % 6] = text[i];
+                gameArr[i % 5] = text[i];
             }
 
         }

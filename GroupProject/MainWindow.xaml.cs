@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace GroupProject
 {
@@ -49,6 +50,55 @@ namespace GroupProject
             }
             Random recommender = new Random();
             new gameWindow(gList.getList().ElementAt(recommender.Next(gList.getList().Count)));
+        }
+
+        public void RecentlyPlayedGame(object sender, RoutedEventArgs e)
+        {
+            if (gList.getList().Count <= 0 || gList.getList() == null)
+            {
+                Window errorWin = new Window();
+                TextBox error = new TextBox();
+                errorWin.Height = 200;
+                errorWin.Width = 200;
+                error.Text = "No games are loaded in!";
+                errorWin.Content = error;
+                errorWin.Show();
+                return;
+            }
+            game recePlayedGame = gList.getList()[0];
+            foreach(game videogame in gList.getList())
+            {
+                if(recePlayedGame.getLastPlayed() < videogame.getLastPlayed())
+                {
+                    recePlayedGame = videogame;
+                }
+                new gameWindow(recePlayedGame);
+            }
+        }
+        public void UnplayedGame(object sender, RoutedEventArgs e)
+        {
+            if (gList.getList().Count <= 0 || gList.getList() == null)
+            {
+                Window errorWin = new Window();
+                TextBox error = new TextBox();
+                errorWin.Height = 200;
+                errorWin.Width = 200;
+                error.Text = "No games are loaded in!";
+                errorWin.Content = error;
+                errorWin.Show();
+                return;
+            }
+            List<game> unplayedGames = new List<game>();
+            foreach(game videogame in gList.getList())
+            {
+                if(videogame.getLastPlayed() == new DateTime(0))
+                {
+                    unplayedGames.Add(videogame);
+                }
+            }
+
+            Random recommender = new Random();
+            new gameWindow(unplayedGames.ElementAt(recommender.Next(unplayedGames.Count)));
         }
 
         public void loadButtons()
@@ -99,7 +149,35 @@ namespace GroupProject
 
         private void addGame_Click(object sender, RoutedEventArgs e)
         {
+            //grab file from folder
+            game videogame;
+            gameFactory fact = new gameFactory();
+            OpenFileDialog selectGame = new OpenFileDialog();
+            selectGame.InitialDirectory = "c:\\";
+            selectGame.Filter = "Executable files (*.exe)|*.exe|All files (*.*)|*.*";
+            selectGame.FilterIndex = 0;
+            selectGame.RestoreDirectory = true;
 
+            if ((bool)selectGame.ShowDialog())
+            {
+                videogame = fact.createGame(selectGame.FileName);
+            }
+            else
+            {
+                return;
+            }
+            
+
+            //append to file
+            System.IO.StreamWriter file = new System.IO.StreamWriter(loadFile, append: true);
+            file.WriteLine(videogame.getTitle());
+            file.WriteLine(videogame.getFilePath());
+            file.WriteLine(videogame.getCoverArt().OriginalString);
+            file.WriteLine(videogame.getLastPlayed().Ticks.ToString());
+            file.WriteLine(videogame.getFileSize().ToString());
+
+            //reload games
+            update();
         }
     }
 }
