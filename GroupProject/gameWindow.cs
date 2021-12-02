@@ -46,8 +46,6 @@ namespace GroupProject
 
         private void fillGrid()
         {
-            //TODO: Restructure for IGDB cover art.
-
             //Logo
             Image gameLogo = new Image();
             gameLogo.Width = 230;
@@ -69,22 +67,6 @@ namespace GroupProject
             gameName.FontSize = 16;
             gameName.FontFamily = new FontFamily("Comic Sans MS");
             marginBuffer.Top += 30;
-
-            //Game Descritpion
-            //TODO: maybe get rid of this idk. If they own the game already do they need a description of it?
-            TextBlock gameDesc = new TextBlock();
-            string dbData = "";
-            {
-                //TODO: get data from igdb
-            }
-            gameDesc.Text = dbData;
-            gameDesc.HorizontalAlignment = HorizontalAlignment.Left;
-            gameDesc.VerticalAlignment = VerticalAlignment.Top;
-            gameDesc.Margin = marginBuffer;
-            gameDesc.Width = this.Width;
-            gameDesc.TextWrapping = TextWrapping.Wrap;
-            gameDesc.FontSize = 16;
-            gameDesc.FontFamily = new FontFamily("Comic Sans MS");
             marginBuffer.Top += 100;
 
 
@@ -177,7 +159,6 @@ namespace GroupProject
             //Add things needed in the gameWindow to the Grid
             mainGrid.Children.Add(gameLogo);
             mainGrid.Children.Add(gameName);
-            mainGrid.Children.Add(gameDesc);
             mainGrid.Children.Add(gameLastPlayed);
             mainGrid.Children.Add(gameLastUpdated);
             mainGrid.Children.Add(gameSize);

@@ -8,8 +8,8 @@ namespace GroupProject
     {
         private Uri getCoverArt(string title)
         {
-            //TODO: remember to fix this with IGDB
-            return new Uri("https://static.wikia.nocookie.net/senkizesshousymphogear/images/4/45/Symphogear_GX_Character_Song_8.png/revision/latest/scale-to-width-down/300?cb=20200728003041");
+            //I'm too dumb to make a twitch app so this is gonna be a smiley face.
+            return new Uri("https://pbs.twimg.com/media/FFlBHyBXMAMczvx?format=png&name=small");
         }
 
         private string getTitle(string filePath)
