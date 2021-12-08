@@ -206,36 +206,22 @@ A few possible stretch goals could be:
 \end{itemize}
 
 \subsection{Requirements}
-As part of fleshing out the scope of your requirements, you'll also need to keep in mind both your functional and non-functional requirements.  These should be listed, and explained in detail as necessary.  Use this area to explain how you gathered these requirements.
+We gathered these requirements based on brainstorming what the program would need to do.
 
 \subsubsection{Functional}
 
 \begin{itemize}
 \item User needs to have a locally stored list of games on the computer - including their locations and any necessary assets such as cover art or icons
-\item User needs to have cover art and icons for each game
-\item User needs to be able to launch games from the program
+\item User needs to have a smiling dude validating their choices for each game
+\item User needs to be able to add, launch, and remove games from the program
 \end{itemize}
 
 \subsubsection{Non-Functional}
 
 \begin{itemize}
-\item Game information has to be saved somewhere convenient to reference whether online or offline 
+\item Game information has to be saved somewhere convenient to reference offline 
 \end{itemize}
 
-%
-%\subsubsection{Functional}
-%\begin{itemize}
-%\item User needs to have a private shopping cart -- this cannot be shared between users, and needs to maintain state across subsequent visits to the site
-%\item Users need to have website accounts -- this will help track recent purchases, keep shopping cart records, etc.
-%\item You'll need more than 2 of these...
-%\end{itemize}
-%
-%\subsubsection{Non-Functional}
-%\begin{itemize}
-%\item Security -- user credentials must be encrypted on disk, users should be able to reset their passwords if forgotten
-%\item you'll typically have fewer non-functional than functional requirements
-%\end{itemize}
-%
 \subsection{Use Cases}
 %This subsection is arguably part of how you define your project scope (why it is in the Scope section...).  In a traditional Waterfall approach, as part of your requirements gathering phase (what does the product actually \emph{need} to do?), you will typically sit down with a user to develop use cases.
 %
@@ -264,14 +250,13 @@ As part of fleshing out the scope of your requirements, you'll also need to keep
 \begin{itemize}
 \item[Use Case Number:] 1
 \item[Use Case Name:] Add a game to list
-\item[Description:] A user wants to add a single game to their list. They open up a settings drop-down and click on an "Add Game To Vapor" button. This will then allow the user to select the file they want to add and subsequently adds it to the program
+\item[Description:] A user wants to add a single game to their list. They click a button and select a game from their computer.
 \end{itemize}
 %
 %You will then go on to (minimally) discuss a basic flow for the process:
 %
 \begin{enumerate}
-\item User opens up the settings menu.
-\item User left-clicks on "Add Game To Vapor" button.
+\item User clicks the Add Game button
 \item User searches for and selects their game.
 \item The program finds everything needed and adds it to the user's list
 \item[Termination Outcome:] The game the user selected is added to their list.
@@ -279,42 +264,14 @@ As part of fleshing out the scope of your requirements, you'll also need to keep
 %
 %You may need to also add in any alternative flows:
 %
-Alternative: Game exists in list
-\begin{enumerate}
-\item User opens up the settings menu.
-\item User left-clicks on "Add Game To Vapor" button.
-\item User searches for and selects their game.
-\item [Termination Outcome:] A message pops up telling the user that the game is already available in their list, and the screen returns to the main list page.
-\end{enumerate}
 %
 %You will often also need to include pictures or diagrams.  It is quite common to see use-case diagrams in such write-ups.  To properly reference an image, you will need to use the \texttt{figure} environment and will need to reference it in your text (via the \texttt{ref} command) (see Figure \ref{cat1}).  NOTE: this is not a use case diagram, but a kitten.
 %
 %After fully describing a use case, it is time to move on to the next use case:
 %
+
 \begin{itemize}
 \item[Use Case Number:] 2
-\item[Use Case Name:] Add a folder of games to list
-\item[Description:] A user wants to add a folder of games to the list. They open up a settings drop-down and click on an "Add Library Folder To Vapor" button. This will then allow the user to select the file they want to a dd and subsequently add it to the program.
-\end{itemize}
-
-\begin{enumerate}
-\item User opens up the settings menu.
-\item User left-clicks on "Add Library Folder To Vapor"
-\item User searches for and selects the folder they want to add.
-\item The program searches through the folder for any games it can find and adds them to the list.
-\item[Termination Outcome:] The folder is added to the program, and the games inside of it are added to the list.
-\end{enumerate}
-
-Alternative: The folder has already been added
-\begin{enumerate}
-\item User opens up the settings menu.
-\item User left-clicks on "Add Library Folder To Vapor"
-\item User searches for and selects the folder they want to add.
-\item[Termination Outcome:] A message pops up saying the folder already exists in the program and returns to the list screen.
-\end{enumerate}
-
-\begin{itemize}
-\item[Use Case Number:] 3
 \item[Use Case Name:] Launch a game from Vapor
 \item[Description:] A user wants to play a game. They left click on the game they want to play from their list, and then left click a "Play" button.
 \end{itemize}
@@ -323,6 +280,19 @@ Alternative: The folder has already been added
 \item User left-clicks on the game they want to launch from their list.
 \item User navigates over to a large "Play" button
 \item[Termination Outcome:] The game is run.
+\end{enumerate}
+
+\begin{itemize}
+\item[Use Case Number:] 3
+\item[Use Case Name:] Remove a game from Vapor
+\item[Description:] A user would like to remove a game from their Vapor library. They click a button, find their game in the drop down menu presented, and remove the game.
+\end{itemize}
+
+\begin{enumerate}
+\item User left-clicks on the Remove Game button.
+\item User clicks on the drop down box and finds the game they would like to remove.
+\item User selects the game they would like to remove and then hit the remove button
+\item[Termination Outcome:] The game is removed from the library, and the user is sent back to the main menu screen.
 \end{enumerate}
 
 %
@@ -339,7 +309,7 @@ Alternative: The folder has already been added
 
 \includegraphics[width=6in]{gamewindow.png}
 \section{Project Timeline}
-Throughout the course of the project, we followed the Waterfall approach. First, we set requirements, in which we got together and created a proposal draft for our project that talks about background, impacts, challenges of our project,stretch goals, and a brief introduction of our project (September 13). Secondly, we started our design phase where we begin to layout our thoughts on design patterns and created a project structure & UML Outline (October 28). Later after our Demo day, we were able to take our feedbacks from the audience to apply it towards updating our diagram structure to wrap up our design phase.
+Throughout the course of the project, we followed the Waterfall approach. First, we set requirements, in which we got together and created a proposal draft for our project that talks about background, impacts, challenges of our project,stretch goals, and a brief introduction of our project (September 13). Secondly, we started our design phase where we begin to layout our thoughts on design patterns and created a project structure and UML Outline (October 28). We spent the time until demo day working on our hard coded demo for class. Later after our Demo day, we were able to take our feedback from the audience to apply it towards updating our diagram structure to finish up our designs and start implementing what we had previously just hard-coded. There were various ups and downs in our plans, but by the end of the semester, we presented our completed product.
 
 %Go back to your notes and look up a typical project development life cycle for the Waterfall approach.  How will you follow this life cycle over the remainder of this semester?  This will usually involve a chart showing your proposed timeline, with specific milestones plotted out.  Make sure you have deliverable dates from the course schedule listed, with a plan to meet them (NOTE: these are generally optimistic deadlines).
 %
@@ -347,8 +317,9 @@ Throughout the course of the project, we followed the Waterfall approach. First,
 In this project, we wanted to make game management easier and more flexible for the user. In addition to that, we wanted to create a better experience, avoid wasting time looking through folders, and avoid wasting money buying a game they already own just because they weren't able to find it in their launcher. There is two windows: a Main for storing and accessing the games, and a secondary Game window to post any additional information present in the game and give the user the ability to play the game.
 
 At first, this will be a little empty (it will need to be filled in by the time you turn in your final report).  This is your chance to discuss all of your design decisions (consider this the README's big brother).
-%
-%\subsection{UML Outline}
+
+\subsection{UML Outline}
+\includegraphics[width=6in]{groupprojectuml.png}
 %Show the full structure of your program.  Make sure to keep on updating this section as your project evolves (you often start out with one plan, but end up modifying things as you move along).  As a note, while Dia fails miserably at generating pdfs (probably my fault), I have had much success with png files.  Make sure to wrap your images in a \texttt{figure} environment, and to reference with the \texttt{ref} command.  For example, see Figure \ref{cat2}.
 %
 %\begin{figure}[ht!]
@@ -368,7 +339,8 @@ For our project, we have created a user-friendly game library manager that allow
 %This section will start out a little vague, but it should grow as your project evolves.  With each deliverable you hand in, give me a final summary of where your project stands.  By the end, this should be a reflective section discussing how many of your original goals you managed to attain/how many desired use cases you implemented/how many extra features you added.
 %
 \subsection{Future Work}
-Throughout the course of this project, we provided weekly updates for the class that set goals for the upcoming week. We also gave a brief overview of what we had accomplished in the previous week, as we looked towards the next. During the duration of the project,
+Now that everything is over, we're going to step away from the project. Steven might touch up some stuff out of spite, and see about implementing ideas mentioned in class, but otherwise we are content with letting the project end with the class.
+%Throughout the course of this project, we provided weekly updates for the class that set goals for the upcoming week. We also gave a brief overview of what we had accomplished in the previous week, as we looked towards the next. During the duration of the project,
 %Where are you going next with your project?
 %For early deliverables, what are your next steps?  (HINT: you will typically want to look back at your timeline and evaluate: did you meet your expected goals?  Are you ahead of schedule?  Did you decide to shift gears and implement a new feature?)
 %By the end, what do you plan on doing with this project?  Will you try to sell it?  Set it on fire?  Link to it on your resume and forget it exists?
