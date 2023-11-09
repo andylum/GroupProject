@@ -1,5 +1,17 @@
-# GroupProject
+# Vapor, A PC Game Library Manager
+Steven Gray and Andy Lum
 
-Group project for CSCI 352
+## Abstract
+In the contemporary world of PC gaming, managing one's game library has become increasingly challenging. Major games are scattered across numerous launchers, while smaller titles often go unnoticed. This is where Vapor, a minimalist PC Game Library Manager, steps in. Vapor is designed to assist gamers in efficiently organizing and tracking all their games, regardless of the launcher they originate from. This proposal encapsulates our progress and vision for Vapor. In the modern era of PC gaming, the challenge of managing one's game library has reached new heights. This issue is further exacerbated by the existence of storefronts without their own launchers, as well as programs managed by storefronts and developers to sell their games. This results in a collection of scattered programs on your computer, often downloaded solely to play one or two specific games.
 
-Authors: Steven Gray and Andy Lum
+Enter Vapor, the solution to this problem. Vapor is a dedicated video game library manager, providing users with a streamlined platform to efficiently manage their extensive game libraries.
+
+## Impacts
+Our primary aim is to revolutionize the user's gaming experience by simplifying game management and enhancing flexibility. We aspire to create an environment where users no longer waste time sifting through folders or launchers to locate their desired games. Additionally, we intend to prevent unnecessary expenses incurred by purchasing games they already own, simply because they can't readily find what they're looking for. Vapor is here to make game management easier, more accessible, and user-friendly.
+
+## Goals
+The Vapor PC Game Library Manager offers a user-friendly interface designed to enhance the gaming experience. It provides a main menu where all of the user's games are readily accessible and playable. The options menu empowers users to effortlessly add new games to their library or designate specific folders as library folders, in addition to an automatically created library folder managed by the program itself. Users can also exercise control over their library by removing individual games or entire library folders, giving them the freedom to organize their gaming collection as they see fit. Furthermore, Vapor allows users to refresh their library at any time, ensuring they can easily discover newly added games or remove titles that are no longer desired. Lastly, it grants users the capability to locate the storage location of any game within their library, adding a practical dimension to the management of their gaming assets.
+
+## Stretch Goals
+As part of our stretch goals, we aim to implement an Offline Mode, providing users with the flexibility to use the launcher without requiring an internet connection, although with potentially limited functionality. Additionally, we plan to introduce distinctive icons that help users quickly identify the source of their games, including platforms like Steam, Battle.net, and even user-defined Library folders. Our goals also encompass the creation of a store page, enabling users to search and browse popular storefronts such as Steam, GOG, and Humble directly from the Vapor interface. Moreover, we intend to provide users with the capability to establish and efficiently manage groups of games, further enhancing the organization and accessibility of their gaming library.
+
